@@ -7,9 +7,9 @@ const Main = props => {
 
     return (
         <div className='main_root'>
-                <Game
-                    {...props}
-                />
+            <Game
+                {...props}
+            />
         </div>
     );
 }
