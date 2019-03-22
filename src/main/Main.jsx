@@ -10,7 +10,6 @@ const Main = props => {
                 <Game
                     {...props}
                 />
-
         </div>
     );
 }
