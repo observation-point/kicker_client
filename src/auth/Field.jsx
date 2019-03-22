@@ -8,7 +8,8 @@ const Field = props => {
                 className='field_input'
                 value={props.value}
                 onChange={props.onChange}
-            /> 
+                type={props.type ? props.type : 'text'}
+            />
         </div>
     );
 }

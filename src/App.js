@@ -8,53 +8,43 @@ import Game from './game/Game';
 
 class App extends Component {
 
-  state = {
-    players: [],
-    goals: [],
-    status: 'ready',
-    user: undefined
-  };
+    constructor(props) {
+        super(props);
 
-
-  async componentDidMount() {
-    console.log(Config.api_url);
-    const { data: gameData } = await axios.get(Config.api_url + '/game');
-    let user;
-    try {
-      user = (await axios.get(Config.api_url + '/auth')).data.user;
-    } catch (error) {
-      user = null;
+        this.state = {
+            user: null
+        }
     }
 
-    console.log(gameData);
+    componentDidMount() {
+        try {
+            axios.get(Config.api_url + '/auth').then(({data}) => {
+                this.setState({
+                    user: data.user
+                });
+            });
+        } catch (e) {
+            console.log('err');
+        }
+    }
 
-    this.setState({
-      players: gameData.players,
-      goals: gameData.goals,
-      status: gameData.status,
-      user
-    });
+    onLogin(user) {
+        this.setState({
+            user: user
+        });
+    }
 
-    console.log(this.state);
-  }
-
-  render() {
-    
-
-    return (
-      <div className="App">
-      {this.state.user
-      ? <Game
-          players={this.state.players}
-          goals={this.state.goals}
-          status={this.state.status}
-          user={this.state.user}
-        />
-        : <Auth/>
-      }
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="App">
+                {this.state.user ?
+                    <Game
+                        user={this.state.user}
+                    /> : <Auth onLogin={this.onLogin.bind(this)}/>
+                }
+            </div>
+        );
+    }
 }
 
 export default App;

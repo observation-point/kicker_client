@@ -1,12 +1,125 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { v4 } from 'uuid';
-
+import Field from './Field';
 import Config from '../config/config';
 
-import Field from './Field';
+const apiUrl = Config.api_url;
 
-const Auth = props => {
+class Auth extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isSignIn: false,
+            login: '',
+            firstName: '',
+            secondName: '',
+            password: ''
+        };
+    }
+
+    async send() {
+        const { isSignIn, login, firstName, secondName, password } = this.state;
+
+        if (!isSignIn) {
+            const { data } = await axios({
+                method: 'post',
+                url: `${apiUrl}/auth/${login}`,
+                withCredentials: true,
+                data: {
+                    password: password
+                }
+            });
+
+            this.props.onLogin(data.user);
+        } else {
+            const { data } = await axios({
+                method: 'post',
+                url: `${apiUrl}/user`,
+                withCredentials: true,
+                data: {
+                    id: v4(),
+                    login: login,
+                    password: password,
+                    firstName: firstName,
+                    lastName: secondName
+                }
+            });
+
+            this.props.onLogin(data.user);
+        }
+    }
+
+    render() {
+        const { isSignIn, login, firstName, secondName, password } = this.state;
+
+        return (<div className='auth_root'>
+            <div className='auth_togglerWrapper'>
+                <div
+                    onClick={() => {this.setState({isSignIn: true})}}
+                    style={isSignIn ? {fontWeight: 'bold'} : null}
+                    className='auth_toggler'
+                >
+                    Sign in
+                </div>
+                <div
+                    onClick={() => {this.setState({isSignIn: false})}}
+                    style={!isSignIn ? {fontWeight: 'bold'} : null}
+                    className='auth_toggler'
+                >
+                    Sign up
+                </div>
+            </div>
+            { isSignIn ? (
+                    <div className='auth_reg'>
+                        <Field
+                            title='login'
+                            value={login}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
+                        />
+                        <Field
+                            title='first name'
+                            value={firstName}
+                            onChange={(event) => {this.setState({firstName: event.target.value})}}
+                        />
+                        <Field
+                            title='second name'
+                            value={secondName}
+                            onChange={(event) => {this.setState({secondName: event.target.value})}}
+                        />
+                        <Field
+                            title='password'
+                            value={password}
+                            type={'password'}
+                            onChange={(event) => {this.setState({password: event.target.value})}}
+                        />
+                    </div>
+                )
+                : (
+                    <div className='auth_reg'>
+                        <Field
+                            title='login'
+                            value={login}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
+                        />
+                        <Field
+                            title='password'
+                            value={password}
+                            type={'password'}
+                            onChange={(event) => {this.setState({password: event.target.value})}}
+                        />
+                    </div>
+                )
+            }
+            <button onClick={this.send.bind(this)}>
+                send
+            </button>
+        </div>);
+    }
+}
+
+const Auth2 = props => {
     const [state, setState] = useState({
         authPage: 'reg',
         login: '',
@@ -92,22 +205,22 @@ const Auth = props => {
                         <Field
                             title='login'
                             value={state.login}
-                            onChange={onLoginChange}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
                         />
                         <Field
                             title='first name'
                             value={state.firstName}
-                            onChange={onFirstNameChange}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
                         />
                         <Field
                             title='second name'
                             value={state.secondName}
-                            onChange={onSecondNameChange}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
                         />
                         <Field
                             title='password'
-                            value={state.pass}
-                            onChange={onPassChange}
+                            value={state.password}
+                            onChange={(event) => {this.setState({login: event.target.value})}}
                         />
                     </div>
                 )

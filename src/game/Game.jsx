@@ -6,77 +6,124 @@ import Goals from './Goals';
 
 import Config from '../config/config';
 
-const join = async (role, side) => {
-    await axios.post(Config.api_url + '/game', {
-        role: role,
-        side: side
-    });
-}
+class Game extends React.Component {
+    constructor(props) {
+        super(props);
 
-const Game = props => {
-    const { players } = props;
-
-    const slots = {
-        red: {
-            attack: null,
-            def: null
-        },
-        black: {
-            attack: null,
-            def: null
+        this.state = {
+            redAttack: null,
+            redDef: null,
+            blackAttack: null,
+            blackDef: null
         }
-    };
+    }
 
-    players.forEach((player) => {
-        if (player.side === 'BLACK') {
-            if (player.role === 'attack') {
-                slots.black.attack = player;
-            } else {
-                slots.black.def = player;
+
+    componentDidMount() {
+        this.fetchData();
+    }
+
+
+    async join(role, side) {
+        const { data } = await axios({
+            method: 'post',
+            url: `${Config.api_url}/game`,
+            withCredentials: true,
+            data: {
+                role: role,
+                side: side
             }
-        } else {
-            if (player.role === 'attack') {
-                slots.red.attack = player;
-            } else {
-                slots.red.def = player;
+        });
+
+        console.log(data);
+    }
+
+    async fetchData() {
+        const { data } = await axios({
+            method: 'get',
+            url: `${Config.api_url}/game`,
+            withCredentials: true,
+        });
+
+        const {players} = data;
+
+        this.setPlayers(players);
+    }
+
+    setPlayers(players) {
+        const slots = {
+            red: {
+                attack: null,
+                def: null
+            },
+            black: {
+                attack: null,
+                def: null
             }
-        }
-    });
+        };
 
-    return (
-        <div className='game_root'>
-            <div className='game_title'>kicker.lan</div>
+        players.forEach((player) => {
+            if (player.side === 'BLACK') {
+                if (player.role === 'attack') {
+                    slots.black.attack = player;
+                } else {
+                    slots.black.def = player;
+                }
+            } else {
+                if (player.role === 'attack') {
+                    slots.red.attack = player;
+                } else {
+                    slots.red.def = player;
+                }
+            }
+        });
 
-            <Goals goals={props.goals} />
+        this.setState({
+            redAttack: slots.red.attack,
+            redDef: slots.red.def,
+            blackAttack: slots.black.attack,
+            blackDef: slots.black.def
+        });
+    }
 
-            <div>{props.status}</div>
+    render() {
+        const { redAttack, redDef, blackAttack, blackDef} = this.state;
 
-            <button
-                disabled={!!slots.red.attack}
-                onClick={() => { join('attack', 'RED') }}
-            >
-                Join (red attack)
-        </button>
-            <button
-                disabled={!!slots.red.def}
-                onClick={() => { join('defense', 'RED') }}
-            >
-                Join (red def)
-        </button>
-            <button
-                disabled={!!slots.black.attack}
-                onClick={() => { join('attack', 'BLACK') }}
-            >
-                Join (black attack)
-        </button>
-            <button
-                disabled={!!slots.black.def}
-                onClick={() => { join('defense', 'BLACK') }}
-            >
-                Join (black def)
-        </button>
-        </div>
-    );
-}
+        return (
+            <div className='game_root'>
+                <div className='game_title'>kicker.lan</div>
+
+                {/*<Goals goals={props.goals} />*/}
+
+                {/*<div>{props.status}</div>*/}
+
+                <button
+                    disabled={!!redAttack}
+                    onClick={() => { this.join('attack', 'RED') }}
+                >
+                    Join (red attack)
+            </button>
+                <button
+                    disabled={!!redDef}
+                    onClick={() => { this.join('defense', 'RED') }}
+                >
+                    Join (red def)
+            </button>
+                <button
+                    disabled={!!blackAttack}
+                    onClick={() => { this.join('attack', 'BLACK') }}
+                >
+                    Join (black attack)
+            </button>
+                <button
+                    disabled={!!blackDef}
+                    onClick={() => { this.join('defense', 'BLACK') }}
+                >
+                    Join (black def)
+            </button>
+            </div>
+        );
+    }
+};
 
 export default Game;
