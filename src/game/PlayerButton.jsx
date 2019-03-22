@@ -13,4 +13,4 @@ const PlayerButton = props => {
     );
 }
 
-export default Field;
+export default PlayerButton;
