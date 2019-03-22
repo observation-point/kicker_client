@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+}
+
+.auth_togglerWrapper {
+  margin: 20px auto;
+  width: 100px;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
+.auth_toggler {
+  cursor: pointer;
+}
