@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { v4 } from 'uuid'
+import { v4 } from 'uuid';
+
+import Config from '../config/config';
 
 import Field from './Field';
 
@@ -46,7 +48,7 @@ const Auth = props => {
 
     const send = async() => {
 
-        let apiUrl = 'http://0.0.0.0:8888/api';
+        let apiUrl = Config.api_url;
         let res;
 
         if (state.authPage === 'reg') {
@@ -63,7 +65,7 @@ const Auth = props => {
             });
         }
 
-        props.authentificate(res.data.user);
+        // props.authentificate(res.data.user);
     }
 
     return (
