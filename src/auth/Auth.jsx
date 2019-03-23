@@ -11,7 +11,7 @@ class Auth extends React.Component {
         super(props);
 
         this.state = {
-            isSignIn: false,
+            isSignIn: true,
             login: '',
             firstName: '',
             secondName: '',
@@ -71,7 +71,7 @@ class Auth extends React.Component {
                     Sign up
                 </div>
             </div>
-            { isSignIn ? (
+            { !isSignIn ? (
                     <div className='auth_reg'>
                         <Field
                             title='login'

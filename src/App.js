@@ -18,7 +18,11 @@ class App extends Component {
 
     componentDidMount() {
         try {
-            axios.get(Config.api_url + '/auth').then(({data}) => {
+            axios({
+                method: 'get',
+                url: Config.api_url + '/auth',
+                withCredentials: true,
+            }).then(({data}) => {
                 this.setState({
                     user: data.user
                 });
