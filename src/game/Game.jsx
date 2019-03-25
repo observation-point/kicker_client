@@ -21,7 +21,7 @@ class Game extends React.Component {
 
 
     componentDidMount() {
-        this.fetchData();
+        setInterval(this.fetchData.bind(this), 1000);
     }
 
 
@@ -47,7 +47,7 @@ class Game extends React.Component {
         });
 
         const { players, goals } = data;
-        console.log(goals);
+
         this.setPlayers(players);
         this.setGoals(goals);
     }
