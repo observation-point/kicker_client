@@ -21,7 +21,8 @@ class Game extends React.Component {
 
 
     componentDidMount() {
-        setInterval(this.fetchData.bind(this), 1000);
+        this.fetchData();
+        setInterval(this.fetchData.bind(this), 100);
     }
 
 
