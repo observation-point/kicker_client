@@ -3,9 +3,9 @@ import React from 'react';
 const Goals = props => {
     return (
         <>
-            <div>{props.goals.filter(item => item.side === 'defence').length}</div>
+            <div style="color: red">{props.goals.filter(item => item.side === 'RED').length}</div>
             -
-            <div>{props.goals.filter(item => item.side === 'attack').length}</div>
+            <div style="color: black">{props.goals.filter(item => item.side === 'BLACK').length}</div>
         </>
     );
 };

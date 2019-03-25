@@ -14,7 +14,8 @@ class Game extends React.Component {
             redAttack: null,
             redDef: null,
             blackAttack: null,
-            blackDef: null
+            blackDef: null,
+            goals: []
         }
     }
 
@@ -45,9 +46,16 @@ class Game extends React.Component {
             withCredentials: true,
         });
 
-        const {players} = data;
-
+        const { players, goals } = data;
+        console.log(goals);
         this.setPlayers(players);
+        this.setGoals(goals);
+    }
+
+    setGoals(goals) {
+        this.setState({
+            goals
+        });
     }
 
     setPlayers(players) {
@@ -87,15 +95,15 @@ class Game extends React.Component {
     }
 
     render() {
-        const { redAttack, redDef, blackAttack, blackDef} = this.state;
+        const { redAttack, redDef, blackAttack, blackDef, goals } = this.state;
 
         return (
             <div className='game_root'>
                 <div className='game_title'>kicker.lan</div>
 
-                {/*<Goals goals={props.goals} />*/}
+                <Goals goals={goals} />
 
-                {/*<div>{props.status}</div>*/}
+                {/* <div>{props.status}</div> */}
 
                 <button
                     disabled={!!redAttack}
