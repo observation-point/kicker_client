@@ -40,6 +40,14 @@ class Game extends React.Component {
         console.log(data);
     }
 
+    async logout() {
+        await axios({
+            method: 'get',
+            url: `${Config.api_url}/auth/logout`,
+            withCredentials: true
+        });
+    }
+
     async fetchData() {
         const { data } = await axios({
             method: 'get',
@@ -129,6 +137,11 @@ class Game extends React.Component {
                     onClick={() => { this.join('defense', 'BLACK') }}
                 >
                     Join (black def)
+            </button>
+            <button
+                    onClick={() => { this.logout() }}
+                >
+                    log out
             </button>
             </div>
         );
