@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
-
-import Player from './Player';
+import io from 'socket.io-client';
 import Goals from './Goals';
 
 import Config from '../config/config';
+
+let socket = io(Config.socket_url);
 
 class Game extends React.Component {
     constructor(props) {
@@ -21,8 +22,8 @@ class Game extends React.Component {
 
 
     componentDidMount() {
-        this.fetchData();
-        setInterval(this.fetchData.bind(this), 100);
+
+        socket.on('updated_game', this.fetchSocketData.bind(this));
     }
 
 
@@ -48,13 +49,7 @@ class Game extends React.Component {
         });
     }
 
-    async fetchData() {
-        const { data } = await axios({
-            method: 'get',
-            url: `${Config.api_url}/game`,
-            withCredentials: true,
-        });
-
+    fetchSocketData(data) {
         const { players, goals } = data;
 
         this.setPlayers(players);
