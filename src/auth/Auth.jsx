@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import { v4 } from 'uuid';
 import Field from './Field';
 import Config from '../config/config';
+import "./Auth.css";
 
 const apiUrl = Config.api_url;
 
@@ -55,6 +56,8 @@ class Auth extends React.Component {
     render() {
         const { isSignIn, login, firstName, secondName, password } = this.state;
 
+        const classButton = isSignIn ? 'button_signin' : 'button_signup';
+
         return (<div className='auth_root'>
             <div className='auth_togglerWrapper'>
                 <div
@@ -62,16 +65,17 @@ class Auth extends React.Component {
                     style={isSignIn ? {fontWeight: 'bold'} : null}
                     className='auth_toggler'
                 >
-                    Sign in
+                    sign in
                 </div>
                 <div
                     onClick={() => {this.setState({isSignIn: false})}}
                     style={!isSignIn ? {fontWeight: 'bold'} : null}
                     className='auth_toggler'
                 >
-                    Sign up
+                    sign up
                 </div>
             </div>
+            <div className='auth_table'>
             { !isSignIn ? (
                     <div className='auth_reg'>
                         <Field
@@ -85,7 +89,7 @@ class Auth extends React.Component {
                             onChange={(event) => {this.setState({firstName: event.target.value})}}
                         />
                         <Field
-                            title='second name'
+                            title='last name'
                             value={secondName}
                             onChange={(event) => {this.setState({secondName: event.target.value})}}
                         />
@@ -113,9 +117,10 @@ class Auth extends React.Component {
                     </div>
                 )
             }
-            <button onClick={this.send.bind(this)}>
-                send
+            <button className={`button_ok ${classButton}`} onClick={this.send.bind(this)}>
+                OK
             </button>
+            </div>
         </div>);
     }
 }

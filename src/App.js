@@ -6,6 +6,8 @@ import Config from './config/config';
 import Auth from './auth/Auth';
 import Game from './game/Game';
 
+console.log(window.location.hostname);
+
 class App extends Component {
 
     constructor(props) {
@@ -38,13 +40,34 @@ class App extends Component {
         });
     }
 
+    async logout() {
+        await axios({
+            method: 'get',
+            url: `${Config.api_url}/auth/logout`,
+            withCredentials: true
+        });
+
+        this.setState({
+            user: null
+        });
+    }
+
     render() {
         return (
             <div className="App">
                 {this.state.user ?
                     <Game
                         user={this.state.user}
-                    /> : <Auth onLogin={this.onLogin.bind(this)}/>
+                    /> 
+                    : <Auth onLogin={this.onLogin.bind(this)}/>
+                }
+                {
+                    this.state.user ?
+                    <button className="logout"
+                    onClick={() => { this.logout() }}
+                >
+                    log out
+                </button> : null
                 }
             </div>
         );
