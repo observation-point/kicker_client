@@ -1,0 +1,76 @@
+.game_root {
+    text-align: center;
+    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+
+}
+
+.game_table {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 70%;
+    background-color: black;
+    color: white;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    margin-top: 20%;
+    border: 4px solid white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.game_title {
+    font-family: monospace;
+    font-size: 50px;
+}
+
+.goals {
+    font-family: monospace;
+    font-size: 100px;
+}
+
+.player_button {
+    position: fixed;
+    display: block;
+    width: 100px;
+    height: 100px;
+    font-family: monospace;
+    font-size: 50px;
+    background-color: black;
+    border: 2px solid white;
+    border-radius: 50%;
+    padding-top: 5px;
+    color: white;
+}
+
+.player_button.red {
+    left: 0;
+}
+
+.player_button.black {
+    right: 0;
+}
+
+.player_button.attack.red {
+    top: 110px;
+}
+
+.player_button.defense.red {
+    bottom: 75px;
+}
+
+.player_button.attack.black {
+    bottom: 75px;
+}
+.player_button.defense.black {
+    top: 110px;
+}

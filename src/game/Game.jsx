@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import './Game.css'
 import io from 'socket.io-client';
 import Goals from './Goals';
+import playerImg from './user.svg';
 
 import Config from '../config/config';
 
@@ -41,15 +43,10 @@ class Game extends React.Component {
         console.log(data);
     }
 
-    async logout() {
-        await axios({
-            method: 'get',
-            url: `${Config.api_url}/auth/logout`,
-            withCredentials: true
-        });
-    }
+
 
     fetchSocketData(data) {
+        console.log('updated data');
         const { players, goals } = data;
 
         this.setPlayers(players);
@@ -104,40 +101,36 @@ class Game extends React.Component {
         return (
             <div className='game_root'>
                 <div className='game_title'>kicker.lan</div>
+                <div className='game_table'>
+                    <Goals goals={goals} />
 
-                <Goals goals={goals} />
+                    {/* <div>{props.status}</div> */}
 
-                {/* <div>{props.status}</div> */}
-
-                <button
-                    disabled={!!redAttack}
-                    onClick={() => { this.join('attack', 'RED') }}
-                >
-                    Join (red attack)
-            </button>
-                <button
-                    disabled={!!redDef}
-                    onClick={() => { this.join('defense', 'RED') }}
-                >
-                    Join (red def)
-            </button>
-                <button
-                    disabled={!!blackAttack}
-                    onClick={() => { this.join('attack', 'BLACK') }}
-                >
-                    Join (black attack)
-            </button>
-                <button
-                    disabled={!!blackDef}
-                    onClick={() => { this.join('defense', 'BLACK') }}
-                >
-                    Join (black def)
-            </button>
-            <button
-                    onClick={() => { this.logout() }}
-                >
-                    log out
-            </button>
+                    <button className="player_button red attack"
+                        disabled={!!redAttack}
+                        onClick={() => { this.join('attack', 'RED') }}
+                    >
+                        {!!redAttack ? <img src={playerImg} /> : <span>+</span> }
+                </button>
+                    <button className="player_button red defense"
+                        disabled={!!redDef}
+                        onClick={() => { this.join('defense', 'RED') }}
+                    >
+                        {!!redDef ? <img src={playerImg} /> : <span>+</span> }
+                </button>
+                    <button className="player_button black attack"
+                        disabled={!!blackAttack}
+                        onClick={() => { this.join('attack', 'BLACK') }}
+                    >
+                        {!!blackAttack ? <img src={playerImg} /> : <span>+</span> }
+                </button>
+                    <button className="player_button black defense"
+                        disabled={!!blackDef}
+                        onClick={() => { this.join('defense', 'BLACK') }}
+                    >
+                        {!!blackDef ? <img src={playerImg} /> : <span>+</span> }
+                </button>
+                </div>
             </div>
         );
     }
