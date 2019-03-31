@@ -89,7 +89,7 @@ class Auth extends React.Component {
                             onChange={(event) => {this.setState({firstName: event.target.value})}}
                         />
                         <Field
-                            title='second name'
+                            title='last name'
                             value={secondName}
                             onChange={(event) => {this.setState({secondName: event.target.value})}}
                         />
