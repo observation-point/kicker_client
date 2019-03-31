@@ -102,7 +102,7 @@ class Auth extends React.Component {
                     </div>
                 )
                 : (
-                    <div className='auth_reg'>
+                    <div className='auth_log'>
                         <Field
                             title='login'
                             value={login}

@@ -21,6 +21,16 @@
   font-family: monospace;
 }
 
+.stopgame {
+  position: fixed;
+  bottom: 2px;
+  right: 2px;
+  background-color: black;
+  border-color: black;
+  color: white;
+  font-family: monospace;
+}
+
 .auth_togglerWrapper {
   margin: 20px auto;
   width: 134px;

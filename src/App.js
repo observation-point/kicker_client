@@ -52,6 +52,14 @@ class App extends Component {
         });
     }
 
+    async stopgame() {
+        await axios({
+            method: 'post',
+            url: `${Config.api_url}/game/stop`,
+            withCredentials: true
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -67,6 +75,14 @@ class App extends Component {
                     onClick={() => { this.logout() }}
                 >
                     log out
+                </button> : null
+                }
+                {
+                    this.state.user ?
+                    <button className="stopgame"
+                    onClick={() => { this.stopgame() }}
+                >
+                    stop game
                 </button> : null
                 }
             </div>

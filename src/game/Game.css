@@ -55,8 +55,8 @@
 }
 
 img.ava {
-    width: 95px;
-    height: 95px;
+    width: 100%;
+    height: 100%;
 }
 
 .player_button.red {
