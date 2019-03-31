@@ -75,7 +75,7 @@ class Auth extends React.Component {
                     sign up
                 </div>
             </div>
-            <div className='game_table'>
+            <div className='auth_table'>
             { !isSignIn ? (
                     <div className='auth_reg'>
                         <Field

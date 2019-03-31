@@ -1,6 +1,5 @@
 .game_root {
     text-align: center;
-    
     position: fixed;
     top: 0;
     left: 0;
@@ -8,38 +7,39 @@
     height: 100%;
     background-color: black;
     color: white;
-
+    display: flex;
+    flex-direction: column;
 }
 
 .game_table {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 78%;
-    height: 70%;
-    background-color: black;
-    color: white;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 10%;
-    margin-top: 20%;
-    border: 4px solid white;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    position: relative;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-top: 0px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
 }
 
 .game_title {
+    height: 20%;
     font-family: monospace;
     font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .goals {
     font-family: monospace;
-    font-size: 100px;
+    font-size: 130px;
 }
 
 .player_button {
-    position: fixed;
+    position: absolute;
     display: block;
     width: 100px;
     height: 100px;
@@ -48,29 +48,36 @@
     background-color: black;
     border: 2px solid white;
     border-radius: 50%;
-    padding-top: 5px;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img.ava {
+    width: 95px;
+    height: 95px;
 }
 
 .player_button.red {
-    left: 0;
+    left: -50px;
 }
 
 .player_button.black {
-    right: 0;
+    right: -50px;
 }
 
 .player_button.attack.red {
-    top: 110px;
+    top: 50px;
 }
 
 .player_button.defense.red {
-    bottom: 75px;
+    bottom: 50px;
 }
 
 .player_button.attack.black {
-    bottom: 75px;
+    bottom: 50px;
 }
 .player_button.defense.black {
-    top: 110px;
+    top: 50px;
 }

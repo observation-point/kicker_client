@@ -110,25 +110,25 @@ class Game extends React.Component {
                         disabled={!!redAttack}
                         onClick={() => { this.join('attack', 'RED') }}
                     >
-                        {!!redAttack ? <img src={playerImg} /> : <span>+</span> }
+                        {!!redAttack ? <img className="ava" src={playerImg} /> : <span>+</span> }
                 </button>
                     <button className="player_button red defense"
                         disabled={!!redDef}
                         onClick={() => { this.join('defense', 'RED') }}
                     >
-                        {!!redDef ? <img src={playerImg} /> : <span>+</span> }
+                        {!!redDef ? <img className="ava" src={playerImg} /> : <span>+</span> }
                 </button>
                     <button className="player_button black attack"
                         disabled={!!blackAttack}
                         onClick={() => { this.join('attack', 'BLACK') }}
                     >
-                        {!!blackAttack ? <img src={playerImg} /> : <span>+</span> }
+                        {!!blackAttack ? <img className="ava" src={playerImg} /> : <span>+</span> }
                 </button>
                     <button className="player_button black defense"
                         disabled={!!blackDef}
                         onClick={() => { this.join('defense', 'BLACK') }}
                     >
-                        {!!blackDef ? <img src={playerImg} /> : <span>+</span> }
+                        {!!blackDef ? <img className="ava" src={playerImg} /> : <span>+</span> }
                 </button>
                 </div>
             </div>
