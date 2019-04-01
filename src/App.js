@@ -68,20 +68,22 @@ class App extends Component {
                         <Game
                             user={this.state.user}
                         />
+                        <div className="footer">
                         <button
                             className="logout"
                             onClick={() => { this.logout() }}
                         >
                             log out
                         </button>
+                        <span className="user_name">
+                            {this.state.user.firstName}
+                        </span>
                         <button 
                             className="stopgame"
                             onClick={() => { this.stopgame() }}
                         >
                             stop game
                         </button>
-                        <div className="user_name">
-                            {this.state.user.firstName}
                         </div>
                     </React.Fragment> :
                     <Auth onLogin={this.onLogin.bind(this)}/>

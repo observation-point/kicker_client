@@ -11,34 +11,27 @@
 
 }
 
-.logout {
+.footer {
   position: fixed;
   bottom: 2px;
-  left: 2px;
+  font-family: monospace;
   background-color: black;
   border-color: black;
   color: white;
-  font-family: monospace;
+  display: flex;
+  flex-direction: row;
+}
+
+.logout {
+  width: 30%;
 }
 
 .stopgame {
-  position: fixed;
-  bottom: 2px;
-  right: 2px;
-  background-color: black;
-  border-color: black;
-  color: white;
-  font-family: monospace;
+  width: 30%;
 }
 
 .user_name {
-  position: fixed;
-  bottom: 2px;
-  text-align: center;
-  background-color: black;
-  border-color: black;
-  color: white;
-  font-family: monospace;
+  width: 40%;
 }
 
 .auth_togglerWrapper {
