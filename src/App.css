@@ -25,6 +25,8 @@
 
 .logout {
   font-family: monospace;
+  background-color: black;
+  border-color: black;
   color: white;
   text-align: left;
   padding-left: 15px;
@@ -33,6 +35,8 @@
 
 .stopgame {
   font-family: monospace;
+  background-color: black;
+  border-color: black;
   color: white;
   text-align: right;
   padding-right: 15px;
