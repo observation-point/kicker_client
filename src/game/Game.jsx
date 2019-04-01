@@ -13,13 +13,17 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
+        const { players, goals } = props;
+
         this.state = {
             redAttack: null,
             redDef: null,
             blackAttack: null,
             blackDef: null,
-            goals: []
+            goals: goals
         }
+
+        this.setPlayers(players);
     }
 
 
@@ -39,14 +43,11 @@ class Game extends React.Component {
                 side: side
             }
         });
-
-        console.log(data);
     }
 
 
 
     fetchSocketData(data) {
-        console.log('updated data');
         const { players, goals } = data;
 
         this.setPlayers(players);

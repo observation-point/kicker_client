@@ -14,24 +14,31 @@ class App extends Component {
         super(props);
 
         this.state = {
-            user: null
+            user: null,
+            goals: [],
+            players: []
         }
     }
 
-    componentDidMount() {
-        try {
-            axios({
-                method: 'get',
-                url: Config.api_url + '/auth',
-                withCredentials: true,
-            }).then(({data}) => {
-                this.setState({
-                    user: data.user
-                });
-            });
-        } catch (e) {
-            console.log('err');
-        }
+    async componentDidMount() {
+        const { data: userData } = await axios({
+            method: 'get',
+            url: Config.api_url + '/auth',
+            withCredentials: true,
+        });
+
+        const { data: gameData } = await axios({
+            method: 'get',
+            url: Config.api_url + '/game',
+            withCredentials: true,
+        });
+
+        this.setState({
+            user: userData.user,
+            players: gameData.players,
+            golas: gameData.goals
+        });
+    
     }
 
     onLogin(user) {
@@ -66,7 +73,8 @@ class App extends Component {
                 {this.state.user ?
                     <React.Fragment>
                         <Game
-                            user={this.state.user}
+                            goals={this.state.goals}
+                            players={this.state.players}
                         />
                         <div className="footer">
                         <button
