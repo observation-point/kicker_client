@@ -33,6 +33,8 @@ class App extends Component {
             withCredentials: true,
         });
 
+        console.log("game data", gameData);
+
         this.setState({
             user: userData.user,
             players: gameData.players,

@@ -13,28 +13,30 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
 
-        const { players, goals } = props;
-
         this.state = {
             redAttack: null,
             redDef: null,
             blackAttack: null,
             blackDef: null,
-            goals: goals
+            goals: []
         }
 
-        this.setPlayers(players);
     }
 
 
     componentDidMount() {
+
+        const { players, goals } = this.props;
+
+        this.setPlayers(players);
+        this.setGoals(goals);
 
         socket.on('updated_game', this.fetchSocketData.bind(this));
     }
 
 
     async join(role, side) {
-        const { data } = await axios({
+        await axios({
             method: 'post',
             url: `${Config.api_url}/game`,
             withCredentials: true,
