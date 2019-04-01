@@ -64,26 +64,27 @@ class App extends Component {
         return (
             <div className="App">
                 {this.state.user ?
-                    <Game
-                        user={this.state.user}
-                    /> 
-                    : <Auth onLogin={this.onLogin.bind(this)}/>
-                }
-                {
-                    this.state.user ?
-                    <button className="logout"
-                    onClick={() => { this.logout() }}
-                >
-                    log out
-                </button> : null
-                }
-                {
-                    this.state.user ?
-                    <button className="stopgame"
-                    onClick={() => { this.stopgame() }}
-                >
-                    stop game
-                </button> : null
+                    <React.Fragment>
+                        <Game
+                            user={this.state.user}
+                        />
+                        <button
+                            className="logout"
+                            onClick={() => { this.logout() }}
+                        >
+                            log out
+                        </button>
+                        <button 
+                            className="stopgame"
+                            onClick={() => { this.stopgame() }}
+                        >
+                            stop game
+                        </button>
+                        <div className="user_name">
+                            {this.state.user.firstName}
+                        </div>
+                    </React.Fragment> :
+                    <Auth onLogin={this.onLogin.bind(this)}/>
                 }
             </div>
         );
