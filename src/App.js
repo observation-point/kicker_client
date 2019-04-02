@@ -6,7 +6,7 @@ import Config from './config/config';
 import Auth from './auth/Auth';
 import Game from './game/Game';
 
-console.log(window.location.hostname);
+console.log("TARGET: ", window.location.hostname);
 
 class App extends Component {
 
@@ -16,7 +16,9 @@ class App extends Component {
         this.state = {
             user: null,
             goals: [],
-            players: []
+            players: [],
+            status: null,
+            startGame: null
         }
     }
 
@@ -33,14 +35,13 @@ class App extends Component {
             withCredentials: true,
         });
 
-        console.log("game data", gameData);
-
         this.setState({
             user: userData.user,
             players: gameData.players,
-            golas: gameData.goals
+            golas: gameData.goals,
+            status: gameData.status,
+            startGame: gameData.startGame
         });
-    
     }
 
     onLogin(user) {
@@ -77,23 +78,25 @@ class App extends Component {
                         <Game
                             goals={this.state.goals}
                             players={this.state.players}
+                            status={this.state.status}
+                            startGame={this.state.startGame}
                         />
                         <div className="footer">
-                        <button
+                        <span
                             className="logout"
                             onClick={() => { this.logout() }}
                         >
                             log out
-                        </button>
+                        </span>
                         <span className="user_name">
                             {this.state.user.firstName}
                         </span>
-                        <button 
+                        <span 
                             className="stopgame"
                             onClick={() => { this.stopgame() }}
                         >
                             stop game
-                        </button>
+                        </span>
                         </div>
                     </React.Fragment> :
                     <Auth onLogin={this.onLogin.bind(this)}/>

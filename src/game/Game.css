@@ -67,6 +67,10 @@ img.ava {
     right: -50px;
 }
 
+.player_button.red {
+    border-color: red;
+}
+
 .player_button.attack.red {
     top: 50px;
 }
@@ -80,4 +84,23 @@ img.ava {
 }
 .player_button.defense.black {
     top: 50px;
+}
+
+.timer {
+    margin-top: 65px;
+    margin-bottom: 60px;
+    font-size: 30px;
+    color: white;
+}
+
+.ava_role_attack {
+    width: 70%;
+    top: 30px;
+    position: absolute;
+}
+
+.ava_role_def {
+    width: 40%;
+    position: absolute;
+    top: 20px;
 }

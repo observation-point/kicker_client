@@ -4,6 +4,8 @@ import './Game.css'
 import io from 'socket.io-client';
 import Goals from './Goals';
 import playerImg from './user.svg';
+import attackImg from './attack.svg';
+import defImg from './defense.svg';
 
 import Config from '../config/config';
 
@@ -18,18 +20,23 @@ class Game extends React.Component {
             redDef: null,
             blackAttack: null,
             blackDef: null,
-            goals: []
+            goals: props.goals,
+            status: props.status,
+            startGame: props.startGame
         }
-
     }
 
 
     componentDidMount() {
 
-        const { players, goals } = this.props;
-
+        const { players, goals, status } = this.props;
+        
+        this.setState({
+            status,
+            goals
+        });
         this.setPlayers(players);
-        this.setGoals(goals);
+
 
         socket.on('updated_game', this.fetchSocketData.bind(this));
     }
@@ -50,16 +57,15 @@ class Game extends React.Component {
 
 
     fetchSocketData(data) {
-        const { players, goals } = data;
+        const { players, goals, status, startGame } = data;
 
-        this.setPlayers(players);
-        this.setGoals(goals);
-    }
-
-    setGoals(goals) {
         this.setState({
-            goals
+            goals,
+            status,
+            startGame
         });
+        this.setPlayers(players);
+
     }
 
     setPlayers(players) {
@@ -99,13 +105,13 @@ class Game extends React.Component {
     }
 
     render() {
-        const { redAttack, redDef, blackAttack, blackDef, goals } = this.state;
+        const { redAttack, redDef, blackAttack, blackDef, goals, status, startGame } = this.state;
 
         return (
             <div className='game_root'>
                 <div className='game_title'>kicker.lan</div>
                 <div className='game_table'>
-                    <Goals goals={goals} />
+                    <Goals goals={goals} status={status} startGame={startGame} />
 
                     {/* <div>{props.status}</div> */}
 
@@ -113,25 +119,32 @@ class Game extends React.Component {
                         disabled={!!redAttack}
                         onClick={() => { this.join('attack', 'RED') }}
                     >
-                        {!!redAttack ? <img className="ava" src={playerImg} /> : <span>+</span> }
+                        {!!redAttack ? 
+                            <img alt=" " className="ava" src={playerImg} /> :
+                            <img alt=" " className="ava_role_attack" src={attackImg} />
+                        }
                 </button>
                     <button className="player_button red defense"
                         disabled={!!redDef}
                         onClick={() => { this.join('defense', 'RED') }}
                     >
-                        {!!redDef ? <img className="ava" src={playerImg} /> : <span>+</span> }
+                        {!!redDef ? <img alt=" " className="ava" src={playerImg} /> : 
+                        <img alt=" " className="ava_role_def" src={defImg} />
+                        }
                 </button>
                     <button className="player_button black attack"
                         disabled={!!blackAttack}
                         onClick={() => { this.join('attack', 'BLACK') }}
                     >
-                        {!!blackAttack ? <img className="ava" src={playerImg} /> : <span>+</span> }
+                        {!!blackAttack ? <img alt=" " className="ava" src={playerImg} /> : 
+                    <img alt=" " className="ava_role_attack" src={attackImg} /> }
                 </button>
                     <button className="player_button black defense"
                         disabled={!!blackDef}
                         onClick={() => { this.join('defense', 'BLACK') }}
                     >
-                        {!!blackDef ? <img className="ava" src={playerImg} /> : <span>+</span> }
+                        {!!blackDef ? <img alt=" " className="ava" src={playerImg} /> :
+                    <img alt=" " className="ava_role_def" src={defImg} /> }
                 </button>
                 </div>
             </div>
