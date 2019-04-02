@@ -13,10 +13,7 @@
 
 .game_table {
     position: relative;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 50px;
-    margin-top: 0px;
+    margin: 50px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -26,7 +23,6 @@
 
 .game_title {
     height: 20%;
-    font-family: monospace;
     font-size: 50px;
     display: flex;
     align-items: center;
@@ -34,8 +30,7 @@
 }
 
 .goals {
-    font-family: monospace;
-    font-size: 130px;
+    font-size: 100px;
 }
 
 .player_button {
@@ -43,7 +38,6 @@
     display: block;
     width: 100px;
     height: 100px;
-    font-family: monospace;
     font-size: 50px;
     background-color: black;
     border: 2px solid white;
@@ -82,6 +76,7 @@ img.ava {
 .player_button.attack.black {
     bottom: 50px;
 }
+
 .player_button.defense.black {
     top: 50px;
 }
@@ -103,4 +98,37 @@ img.ava {
     width: 40%;
     position: absolute;
     top: 20px;
+}
+
+@media all and (orientation: landscape), all and (max-height: 480px) {
+    .game_table {
+        
+    }
+    .goals {
+        font-size: 64px;
+    }
+    .timer {
+        margin: 20px 0px;
+        font-size: 30px;
+        color: white;
+    }
+    .player_button.attack.red {
+        top: -50px;
+        left: unset;
+        right: 50px;
+    }
+    .player_button.defense.red {
+        bottom: unset;
+        top: -50px;
+        left: 50px;
+    }
+    .player_button.attack.black {
+        left: 50px;
+        bottom: -50px;
+    }
+    .player_button.defense.black {
+        top: unset;
+        bottom: -50px;
+        right: 50px;
+    }
 }

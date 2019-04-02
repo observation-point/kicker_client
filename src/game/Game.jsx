@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './Game.css'
+import './Game.css';
 import io from 'socket.io-client';
 import Goals from './Goals';
 import playerImg from './user.svg';
@@ -8,6 +8,7 @@ import attackImg from './attack.svg';
 import defImg from './defense.svg';
 
 import Config from '../config/config';
+import Title from '../components/Title';
 
 let socket = io(Config.socket_url);
 
@@ -23,24 +24,18 @@ class Game extends React.Component {
             goals: props.goals,
             status: props.status,
             startGame: props.startGame
-        }
+        };
     }
 
-
     componentDidMount() {
-
         const { players, goals, status } = this.props;
-        
         this.setState({
             status,
             goals
         });
         this.setPlayers(players);
-
-
         socket.on('updated_game', this.fetchSocketData.bind(this));
     }
-
 
     async join(role, side) {
         await axios({
@@ -54,8 +49,6 @@ class Game extends React.Component {
         });
     }
 
-
-
     fetchSocketData(data) {
         const { players, goals, status, startGame } = data;
 
@@ -65,7 +58,6 @@ class Game extends React.Component {
             startGame
         });
         this.setPlayers(players);
-
     }
 
     setPlayers(players) {
@@ -80,7 +72,7 @@ class Game extends React.Component {
             }
         };
 
-        players.forEach((player) => {
+        players.forEach(player => {
             if (player.side === 'BLACK') {
                 if (player.role === 'attack') {
                     slots.black.attack = player;
@@ -104,52 +96,79 @@ class Game extends React.Component {
         });
     }
 
+    getGoalCount() {
+        const redTeamGoals = this.state.goals.filter(item => item.side === 'RED').length
+        const blackTeamGoals = this.state.goals.filter(item => item.side === 'BLACK').length
+        return `${redTeamGoals} : ${blackTeamGoals} | ${this.state.status}`
+    }
+
     render() {
         const { redAttack, redDef, blackAttack, blackDef, goals, status, startGame } = this.state;
-
+ 
         return (
-            <div className='game_root'>
-                <div className='game_title'>kicker.lan</div>
-                <div className='game_table'>
+            <div className="game_root">
+                <Title pageTitle={this.getGoalCount()} />
+                <div className="game_table">
                     <Goals goals={goals} status={status} startGame={startGame} />
 
                     {/* <div>{props.status}</div> */}
 
-                    <button className="player_button red attack"
+                    <button
+                        className="player_button red attack"
                         disabled={!!redAttack}
-                        onClick={() => { this.join('attack', 'RED') }}
+                        onClick={() => {
+                            this.join('attack', 'RED');
+                        }}
                     >
-                        {!!redAttack ? 
-                            <img alt=" " className="ava" src={playerImg} /> :
+                        {!!redAttack ? (
+                            <img alt=" " className="ava" src={playerImg} />
+                        ) : (
                             <img alt=" " className="ava_role_attack" src={attackImg} />
-                        }
-                </button>
-                    <button className="player_button red defense"
+                        )}
+                    </button>
+                    <button
+                        className="player_button red defense"
                         disabled={!!redDef}
-                        onClick={() => { this.join('defense', 'RED') }}
+                        onClick={() => {
+                            this.join('defense', 'RED');
+                        }}
                     >
-                        {!!redDef ? <img alt=" " className="ava" src={playerImg} /> : 
-                        <img alt=" " className="ava_role_def" src={defImg} />
-                        }
-                </button>
-                    <button className="player_button black attack"
+                        {!!redDef ? (
+                            <img alt=" " className="ava" src={playerImg} />
+                        ) : (
+                            <img alt=" " className="ava_role_def" src={defImg} />
+                        )}
+                    </button>
+                    <button
+                        className="player_button black attack"
                         disabled={!!blackAttack}
-                        onClick={() => { this.join('attack', 'BLACK') }}
+                        onClick={() => {
+                            this.join('attack', 'BLACK');
+                        }}
                     >
-                        {!!blackAttack ? <img alt=" " className="ava" src={playerImg} /> : 
-                    <img alt=" " className="ava_role_attack" src={attackImg} /> }
-                </button>
-                    <button className="player_button black defense"
+                        {!!blackAttack ? (
+                            <img alt=" " className="ava" src={playerImg} />
+                        ) : (
+                            <img alt=" " className="ava_role_attack" src={attackImg} />
+                        )}
+                    </button>
+                    <button
+                        className="player_button black defense"
                         disabled={!!blackDef}
-                        onClick={() => { this.join('defense', 'BLACK') }}
+                        onClick={() => {
+                            this.join('defense', 'BLACK');
+                        }}
                     >
-                        {!!blackDef ? <img alt=" " className="ava" src={playerImg} /> :
-                    <img alt=" " className="ava_role_def" src={defImg} /> }
-                </button>
+                        {!!blackDef ? (
+                            <img alt=" " className="ava" src={playerImg} />
+                        ) : (
+                            <img alt=" " className="ava_role_def" src={defImg} />
+                        )}
+                    </button>
                 </div>
             </div>
         );
     }
-};
+}
 
 export default Game;
