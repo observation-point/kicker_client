@@ -38,7 +38,7 @@ class App extends Component {
         this.setState({
             user: userData.user,
             players: gameData.players,
-            golas: gameData.goals,
+            goals: gameData.goals,
             status: gameData.status,
             startGame: gameData.startGame
         });
@@ -86,6 +86,7 @@ class App extends Component {
                 }
             }
         };
+
         return (
             <div id="App">
                 <Sidebar
@@ -97,7 +98,6 @@ class App extends Component {
                 {this.state.user ? (
                     <React.Fragment>
                         <Game
-                            id="root"
                             goals={this.state.goals}
                             players={this.state.players}
                             status={this.state.status}

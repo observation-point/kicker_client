@@ -21,6 +21,16 @@
     border: 2px solid white;
 }
 
+.goal_red {
+    color: red;
+}
+
+.goal_black {
+    color: black;
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: white;
+}
+
 .game_title {
     display: block;
     font-size: 24px;
@@ -100,9 +110,6 @@ img.ava {
 }
 
 @media all and (orientation: landscape), all and (max-height: 480px) {
-    .game_table {
-        
-    }
     .goals {
         font-size: 64px;
     }
