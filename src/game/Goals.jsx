@@ -28,7 +28,7 @@ class Goals extends React.Component {
 
                     this.state.time === NOT_A_DATE ?
                         NOT_A_DATE :
-                        `${minutes > 10 ? minutes : '0'+minutes} : ${seconds > 10 ? seconds : '0'+seconds}` 
+                        `${minutes > 9 ? minutes : '0'+minutes} : ${seconds > 9 ? seconds : '0'+seconds}` 
                 }</div>
                 <div style={{ color: 'white' }}>{this.props.goals.filter(item => item.side === 'BLACK').length}</div>
             </div>
