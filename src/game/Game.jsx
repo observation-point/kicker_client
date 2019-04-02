@@ -111,7 +111,7 @@ class Game extends React.Component {
                 <div className="game_table">
                     <Goals goals={goals} status={status} startGame={startGame} />
 
-                    {/* <div>{props.status}</div> */}
+                    <div className="game_title">kicker.lan</div>
 
                     <button
                         className="player_button red attack"
