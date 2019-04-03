@@ -106,7 +106,7 @@ class Game extends React.Component {
         const { redAttack, redDef, blackAttack, blackDef, goals, status, startGame } = this.state;
  
         return (
-            <div className="game_root">
+            <div id="game_root" className="game_root">
                 <Title pageTitle={this.getGoalCount()} />
                 <div className="game_table">
                     <Goals goals={goals} status={status} startGame={startGame} />

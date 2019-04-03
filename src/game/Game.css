@@ -1,12 +1,5 @@
 .game_root {
-    text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    color: white;
+    height: inherit;
     display: flex;
     flex-direction: column;
 }
@@ -100,9 +93,6 @@ img.ava {
 }
 
 @media all and (orientation: landscape), all and (max-height: 480px) {
-    .game_table {
-        
-    }
     .goals {
         font-size: 64px;
     }

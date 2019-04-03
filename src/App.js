@@ -89,7 +89,7 @@ class App extends Component {
         return (
             <div id="App">
                 <Sidebar
-                    pageWrapId={'root'}
+                    pageWrapId={'game_root'}
                     outerContainerId={'App'}
                     userProfile={userProfile}
                     menuOptions={menuOptions}
@@ -97,7 +97,6 @@ class App extends Component {
                 {this.state.user ? (
                     <React.Fragment>
                         <Game
-                            id="root"
                             goals={this.state.goals}
                             players={this.state.players}
                             status={this.state.status}
