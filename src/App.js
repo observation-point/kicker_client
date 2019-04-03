@@ -38,7 +38,7 @@ class App extends Component {
         this.setState({
             user: userData.user,
             players: gameData.players,
-            golas: gameData.goals,
+            goals: gameData.goals,
             status: gameData.status,
             startGame: gameData.startGame
         });
@@ -86,6 +86,7 @@ class App extends Component {
                 }
             }
         };
+
         return (
             <div id="App">
                 <Sidebar

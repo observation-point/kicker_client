@@ -104,7 +104,7 @@ class Game extends React.Component {
 
     render() {
         const { redAttack, redDef, blackAttack, blackDef, goals, status, startGame } = this.state;
- 
+        console.log(redAttack);
         return (
             <div id="game_root" className="game_root">
                 <Title pageTitle={this.getGoalCount()} />
@@ -121,9 +121,15 @@ class Game extends React.Component {
                         }}
                     >
                         {!!redAttack ? (
+                            <React.Fragment>
                             <img alt=" " className="ava" src={playerImg} />
+                            <span className="role_name">{redAttack.user.firstName}</span>
+                            </React.Fragment>
                         ) : (
-                            <img alt=" " className="ava_role_attack" src={attackImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava_role_attack" src={attackImg} />
+                                <span className="role_name">attack</span>
+                            </React.Fragment>
                         )}
                     </button>
                     <button
@@ -134,9 +140,15 @@ class Game extends React.Component {
                         }}
                     >
                         {!!redDef ? (
-                            <img alt=" " className="ava" src={playerImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava" src={playerImg} />
+                                <span className="role_name">{redDef.user.firstName}</span>
+                            </React.Fragment>
                         ) : (
-                            <img alt=" " className="ava_role_def" src={defImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava_role_def" src={defImg} />
+                                <span className="role_name">defense</span>
+                            </React.Fragment>
                         )}
                     </button>
                     <button
@@ -147,9 +159,15 @@ class Game extends React.Component {
                         }}
                     >
                         {!!blackAttack ? (
-                            <img alt=" " className="ava" src={playerImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava" src={playerImg} />
+                                <span className="role_name">{blackAttack.user.firstName}</span>
+                            </React.Fragment>
                         ) : (
-                            <img alt=" " className="ava_role_attack" src={attackImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava_role_attack" src={attackImg} />
+                                <span className="role_name">attack</span>
+                            </React.Fragment>
                         )}
                     </button>
                     <button
@@ -160,9 +178,15 @@ class Game extends React.Component {
                         }}
                     >
                         {!!blackDef ? (
-                            <img alt=" " className="ava" src={playerImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava" src={playerImg} />
+                                <span className="role_name">{blackDef.user.firstName}</span>
+                            </React.Fragment>
                         ) : (
-                            <img alt=" " className="ava_role_def" src={defImg} />
+                            <React.Fragment>
+                                <img alt=" " className="ava_role_def" src={defImg} />
+                                <span className="role_name">defense</span>
+                            </React.Fragment>
                         )}
                     </button>
                 </div>
