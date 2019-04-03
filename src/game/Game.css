@@ -140,11 +140,11 @@ img.ava {
         bottom: -50px;
         right: 50px;
     }
-    .player_button.attack.black span {
+    .player_button.attack.black span.role_name {
         bottom: unset;
         top: -35px;
     }
-    .player_button.player_button.defense.black span {
+    .player_button.player_button.defense.black span.role_name {
         bottom: unset;
         top: -35px;
     }
