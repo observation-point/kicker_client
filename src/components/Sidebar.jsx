@@ -14,6 +14,9 @@ export default props => {
         },
         bmMenuWrap: {
             width: '250px'
+        },
+        bmOverlay: {
+            backgroundColor: 'rgba(200, 200, 200, 0.3)'
         }
     }
     return (
