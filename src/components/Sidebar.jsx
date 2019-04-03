@@ -7,9 +7,18 @@ export default props => {
     const user = props.userProfile;
     const handleStopGame = props.menuOptions.stopGame.method;
     const handleLogout = props.menuOptions.logout.method;
+
+    var styles = {
+        bmBurgerBars: {
+            height: '8%'
+        },
+        bmMenuWrap: {
+            width: '250px'
+        }
+    }
     return (
         // Pass on our props
-        <Menu right>
+        <Menu right styles={ styles }>
             {user ? (
                 <div className="menu-profile">
                     <h2> {user && user.firstName} </h2>
