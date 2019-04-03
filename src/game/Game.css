@@ -32,6 +32,7 @@
 }
 
 .goals {
+    text-align: center;
     font-size: 100px;
 }
 
@@ -52,7 +53,6 @@
 
 .role_name {
     position: absolute;
-    font-family: monospace;
     font-size: 15px;
     bottom: -35px;
     background-color: black;
@@ -139,5 +139,13 @@ img.ava {
         top: unset;
         bottom: -50px;
         right: 50px;
+    }
+    .player_button.attack.black span {
+        bottom: unset;
+        top: -35px;
+    }
+    .player_button.player_button.defense.black span {
+        bottom: unset;
+        top: -35px;
     }
 }
