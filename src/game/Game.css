@@ -1,5 +1,12 @@
 .game_root {
-    height: inherit;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: column;
 }
@@ -12,6 +19,11 @@
     align-items: center;
     justify-content: center;
     border: 2px solid white;
+}
+
+.goals {
+    text-align: center;
+    font-size: 100px;
 }
 
 .goal_red {
@@ -31,11 +43,6 @@
     top: -40px;
 }
 
-.goals {
-    text-align: center;
-    font-size: 100px;
-}
-
 .player_button {
     position: absolute;
     display: block;
@@ -53,6 +60,7 @@
 
 .role_name {
     position: absolute;
+    font-family: monospace;
     font-size: 15px;
     bottom: -35px;
     background-color: black;
