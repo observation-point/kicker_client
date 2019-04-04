@@ -123,7 +123,7 @@ class Game extends React.Component {
                         {!!redAttack ? (
                             <React.Fragment>
                             <img alt=" " className="ava" src={playerImg} />
-                            <span className="role_name">{redAttack.user.firstName}</span>
+                            <span className="role_name">{redAttack.user.firstName} ({redAttack.user.rating})</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -142,7 +142,7 @@ class Game extends React.Component {
                         {!!redDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{redDef.user.firstName}</span>
+                                <span className="role_name">{redDef.user.firstName} ({redDef.user.rating})</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -161,7 +161,7 @@ class Game extends React.Component {
                         {!!blackAttack ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackAttack.user.firstName}</span>
+                                <span className="role_name">{blackAttack.user.firstName} ({blackAttack.user.rating})</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -180,7 +180,7 @@ class Game extends React.Component {
                         {!!blackDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackDef.user.firstName}</span>
+                                <span className="role_name">{blackDef.user.firstName} ({blackDef.user.rating})</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
