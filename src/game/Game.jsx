@@ -37,14 +37,14 @@ class Game extends React.Component {
         socket.on('updated_game', this.fetchSocketData.bind(this));
     }
 
-    async join(role, side) {
+    async join(role, team) {
         await axios({
             method: 'post',
             url: `${Config.api_url}/game`,
             withCredentials: true,
             data: {
                 role: role,
-                side: side
+                team: team
             }
         });
     }
@@ -73,7 +73,7 @@ class Game extends React.Component {
         };
 
         players.forEach(player => {
-            if (player.side === 'BLACK') {
+            if (player.team === 'BLACK') {
                 if (player.role === 'attack') {
                     slots.black.attack = player;
                 } else {
@@ -97,8 +97,8 @@ class Game extends React.Component {
     }
 
     getGoalCount() {
-        const redTeamGoals = this.state.goals.filter(item => item.side === 'RED').length
-        const blackTeamGoals = this.state.goals.filter(item => item.side === 'BLACK').length
+        const redTeamGoals = this.state.goals.filter(item => item.team === 'RED').length
+        const blackTeamGoals = this.state.goals.filter(item => item.team === 'BLACK').length
         return `${redTeamGoals} : ${blackTeamGoals} | ${this.state.status}`
     }
 

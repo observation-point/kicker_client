@@ -22,7 +22,7 @@ class Goals extends React.Component {
         const seconds = new Date(this.state.time).getSeconds();
         return (
             <div className="goals">
-                <div className="goal_red">{this.props.goals.filter(item => item.side === 'RED').length}</div>
+                <div className="goal_red">{this.props.goals.filter(item => item.team === 'RED').length}</div>
                 <div className="timer" style={{ color: 'white' }}>{
                     
 
@@ -30,7 +30,7 @@ class Goals extends React.Component {
                         NOT_A_DATE :
                         `${minutes > 9 ? minutes : '0'+minutes} : ${seconds > 9 ? seconds : '0'+seconds}` 
                 }</div>
-                <div className="goal_black">{this.props.goals.filter(item => item.side === 'BLACK').length}</div>
+                <div className="goal_black">{this.props.goals.filter(item => item.team === 'BLACK').length}</div>
             </div>
         );
     }
