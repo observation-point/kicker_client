@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import { v4 } from 'uuid';
 import Field from './Field';
 import Config from '../config/config';
 import "./Auth.css";
@@ -14,14 +13,13 @@ class Auth extends React.Component {
         this.state = {
             isSignIn: true,
             login: '',
-            firstName: '',
-            secondName: '',
+            fullname: '',
             password: ''
         };
     }
 
     async send() {
-        const { isSignIn, login, firstName, secondName, password } = this.state;
+        const { isSignIn, login, fullname, password } = this.state;
 
         if (isSignIn) {
 
@@ -41,11 +39,9 @@ class Auth extends React.Component {
                 url: `${apiUrl}/user`,
                 withCredentials: true,
                 data: {
-                    id: v4(),
                     login: login,
                     password: password,
-                    firstName: firstName,
-                    lastName: secondName
+                    fullname: fullname
                 }
             });
 
@@ -54,7 +50,7 @@ class Auth extends React.Component {
     }
 
     render() {
-        const { isSignIn, login, firstName, secondName, password } = this.state;
+        const { isSignIn, login, fullname, password } = this.state;
 
         const classButton = isSignIn ? 'button_signin' : 'button_signup';
 
@@ -79,22 +75,17 @@ class Auth extends React.Component {
             { !isSignIn ? (
                     <div className='auth_reg'>
                         <Field
-                            title='login'
+                            title='login *'
                             value={login}
                             onChange={(event) => {this.setState({login: event.target.value})}}
                         />
                         <Field
-                            title='first name'
-                            value={firstName}
-                            onChange={(event) => {this.setState({firstName: event.target.value})}}
+                            title='fullname'
+                            value={fullname}
+                            onChange={(event) => {this.setState({fullname: event.target.value})}}
                         />
                         <Field
-                            title='last name'
-                            value={secondName}
-                            onChange={(event) => {this.setState({secondName: event.target.value})}}
-                        />
-                        <Field
-                            title='password'
+                            title='password *'
                             value={password}
                             type={'password'}
                             onChange={(event) => {this.setState({password: event.target.value})}}
