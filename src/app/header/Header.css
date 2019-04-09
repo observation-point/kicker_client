@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10%;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    font-style: oblique;
+    position: absolute;
+    width: 100%;
+    color: white;
+    mix-blend-mode: difference;
+}
