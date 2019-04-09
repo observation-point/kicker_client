@@ -4,8 +4,7 @@ import './Game.css';
 import io from 'socket.io-client';
 import Goals from './Goals';
 import playerImg from './user.svg';
-import attackImg from './attack.svg';
-import defImg from './defense.svg';
+import playerRedImg from './user_red.svg';
 
 import Config from '../config/config';
 import Title from '../components/Title';
@@ -122,7 +121,7 @@ class Game extends React.Component {
                     >
                         {!!redAttack ? (
                             <React.Fragment>
-                            <img alt=" " className="ava" src={playerImg} />
+                            <img alt=" " className="ava" src={playerRedImg} />
                             <span className="role_name">{redAttack.user.firstName} ({redAttack.user.rating})</span>
                             </React.Fragment>
                         ) : (
@@ -142,7 +141,7 @@ class Game extends React.Component {
                     >
                         {!!redDef ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={playerImg} />
+                                <img alt=" " className="ava" src={playerRedImg} />
                                 <span className="role_name">{redDef.user.firstName} ({redDef.user.rating})</span>
                             </React.Fragment>
                         ) : (

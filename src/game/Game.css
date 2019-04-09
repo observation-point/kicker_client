@@ -62,7 +62,10 @@
     position: absolute;
     font-family: monospace;
     font-size: 15px;
-    bottom: -35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: -48px;
     background-color: black;
     padding-top: 5px;
     padding-bottom: 5px;
