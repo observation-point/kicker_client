@@ -127,7 +127,8 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_attack" src={attackImg} />
+                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <p className="role-char">+</p>
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -146,8 +147,9 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_def" src={defImg} />
+                                {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
                                 <span className="role_name">defense</span>
+                                <p className="role-char">+</p>
                             </React.Fragment>
                         )}
                     </button>
@@ -165,7 +167,8 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_attack" src={attackImg} />
+                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <p className="role-char">+</p>
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -184,8 +187,9 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_def" src={defImg} />
+                                {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
                                 <span className="role_name">defense</span>
+                                <p className="role-char">+</p>
                             </React.Fragment>
                         )}
                     </button>

@@ -68,21 +68,26 @@
     padding-bottom: 5px;
 }
 
+.role-char {
+    display: block;
+    margin: 0;
+    padding-bottom: 5px;
+    font-family: monospace;
+    font-size: 70px;
+}
+
 img.ava {
     width: 100%;
     height: 100%;
 }
 
 .player_button.red {
-    left: -50px;
-}
-
-.player_button.black {
+    background-color: red;
     right: -50px;
 }
 
-.player_button.red {
-    border-color: red;
+.player_button.black {
+    left: -50px;
 }
 
 .player_button.attack.red {
@@ -145,6 +150,7 @@ img.ava {
     }
     .player_button.defense.black {
         top: unset;
+        left: unset;
         bottom: -50px;
         right: 50px;
     }
