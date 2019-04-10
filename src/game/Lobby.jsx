@@ -3,6 +3,7 @@ import axios from 'axios';
 import './Game.css';
 import io from 'socket.io-client';
 
+import Game from './Game';
 import Config from '../config/config';
 import GameResult from './GameResult';
 

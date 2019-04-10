@@ -1,9 +1,6 @@
 import React from 'react';
 
 class GameResult extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const { goals, closeGameResult } = this.props;

@@ -4,7 +4,6 @@ import playerImg from './user.svg';
 import playerRedImg from './user_red.svg';
 import plusImg from './plus.svg';
 import plusRedImg from './plus_red.svg';
-
 import Title from '../components/Title';
 
 const NOT_A_DATE = '- : -';
@@ -48,7 +47,6 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
                                 <img alt=" " className="role-char" src={plusRedImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
@@ -66,7 +64,6 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
                                 <img alt=" " className="role-char" src={plusRedImg} />
                             </React.Fragment>
@@ -84,7 +81,6 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
                                 <img alt=" " className="role-char" src={plusImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
@@ -102,7 +98,6 @@ class Game extends React.Component {
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
                                 <img alt=" " className="role-char" src={plusImg} />
                             </React.Fragment>
