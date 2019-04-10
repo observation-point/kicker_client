@@ -13,7 +13,7 @@
 
 .game_table {
     position: relative;
-    margin: 50px;
+    margin: 50px 55px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -64,16 +64,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: -48px;
+    bottom: -35px;
     background-color: black;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 4px 0;
 }
 
 .role-char {
-    display: block;
-    margin: 0;
-    font-size: 70px;
+    width: 50%;
+    height: 50%;
 }
 
 img.ava {
@@ -126,6 +124,9 @@ img.ava {
 }
 
 @media all and (orientation: landscape), all and (max-height: 480px) {
+    .game_table {
+        margin: 55px 50px;
+    }
     .goals {
         font-size: 64px;
     }

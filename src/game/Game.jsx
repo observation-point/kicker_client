@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 import Goals from './Goals';
 import playerImg from './user.svg';
 import playerRedImg from './user_red.svg';
+import plusImg from './plus.svg';
+import plusRedImg from './plus_red.svg';
 
 import Config from '../config/config';
 import Title from '../components/Title';
@@ -127,7 +129,7 @@ class Game extends React.Component {
                         ) : (
                             <React.Fragment>
                                 {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusRedImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -148,7 +150,7 @@ class Game extends React.Component {
                             <React.Fragment>
                                 {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
                                 <span className="role_name">defense</span>
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusRedImg} />
                             </React.Fragment>
                         )}
                     </div>
@@ -167,7 +169,7 @@ class Game extends React.Component {
                         ) : (
                             <React.Fragment>
                                 {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -188,7 +190,7 @@ class Game extends React.Component {
                             <React.Fragment>
                                 {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
                                 <span className="role_name">defense</span>
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusImg} />
                             </React.Fragment>
                         )}
                     </div>
