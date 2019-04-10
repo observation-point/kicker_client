@@ -24,7 +24,8 @@ export default props => {
         <Menu right styles={ styles }>
             {user ? (
                 <div className="menu-profile">
-                    <h2> {user && user.firstName} </h2>
+                    <h2>{user.fullname}</h2>
+                    <h3>{user.rating}</h3>
                     <img alt=" " className="menu-profile-ava" src={playerImg} />
                 </div>
             ) : null}
