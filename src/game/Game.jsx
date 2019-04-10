@@ -124,7 +124,7 @@ class Game extends React.Component {
                         {!!redAttack ? (
                             <React.Fragment>
                             <img alt=" " className="ava" src={playerRedImg} />
-                            <span className="role_name">{redAttack.user.login} ({redAttack.user.rating})</span>
+                            <span className="role_name">{redAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -144,7 +144,7 @@ class Game extends React.Component {
                         {!!redDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerRedImg} />
-                                <span className="role_name">{redDef.user.login} ({redDef.user.rating})</span>
+                                <span className="role_name">{redDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -164,7 +164,7 @@ class Game extends React.Component {
                         {!!blackAttack ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackAttack.user.login} ({blackAttack.user.rating})</span>
+                                <span className="role_name">{blackAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
@@ -184,7 +184,7 @@ class Game extends React.Component {
                         {!!blackDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackDef.user.login} ({blackDef.user.rating})</span>
+                                <span className="role_name">{blackDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>

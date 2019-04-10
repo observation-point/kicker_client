@@ -64,7 +64,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: -35px;
+    top: 110px;
     background-color: black;
     padding: 4px 0;
 }
@@ -81,11 +81,11 @@ img.ava {
 
 .player_button.red {
     background-color: red;
-    right: -50px;
+    right: -52.5px;
 }
 
 .player_button.black {
-    left: -50px;
+    left: -52.5px;
 }
 
 .player_button.attack.red {
