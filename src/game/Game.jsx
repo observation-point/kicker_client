@@ -112,7 +112,7 @@ class Game extends React.Component {
 
                     <div className="game_title">kicker.lan</div>
 
-                    <button
+                    <div
                         className="player_button red attack"
                         disabled={!!redAttack}
                         onClick={() => {
@@ -131,8 +131,8 @@ class Game extends React.Component {
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button red defense"
                         disabled={!!redDef}
                         onClick={() => {
@@ -151,8 +151,8 @@ class Game extends React.Component {
                                 <p className="role-char">+</p>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button black attack"
                         disabled={!!blackAttack}
                         onClick={() => {
@@ -171,8 +171,8 @@ class Game extends React.Component {
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button black defense"
                         disabled={!!blackDef}
                         onClick={() => {
@@ -191,7 +191,7 @@ class Game extends React.Component {
                                 <p className="role-char">+</p>
                             </React.Fragment>
                         )}
-                    </button>
+                    </div>
                 </div>
             </div>
         );

@@ -1,8 +1,3 @@
-@font-face {
-    font-family: Consola; /* Имя шрифта */
-    src: url(consola.ttf); /* Путь к файлу со шрифтом */
-   }
-
 #App {
     /* text-align: center; */
     height: 100vh;
