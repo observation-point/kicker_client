@@ -1,197 +1,118 @@
 import React from 'react';
-import axios from 'axios';
-import './Game.css';
-import io from 'socket.io-client';
 import Goals from './Goals';
 import playerImg from './user.svg';
 import playerRedImg from './user_red.svg';
-
-import Config from '../config/config';
 import Title from '../components/Title';
 
-let socket = io(Config.socket_url);
+const NOT_A_DATE = '- : -';
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            redAttack: null,
-            redDef: null,
-            blackAttack: null,
-            blackDef: null,
-            goals: props.goals,
-            status: props.status,
-            startGame: props.startGame
-        };
-    }
-
-    componentDidMount() {
-        const { players, goals, status } = this.props;
-        this.setState({
-            status,
-            goals
-        });
-        this.setPlayers(players);
-        socket.on('updated_game', this.fetchSocketData.bind(this));
-    }
-
-    async join(role, team) {
-        await axios({
-            method: 'post',
-            url: `${Config.api_url}/game`,
-            withCredentials: true,
-            data: {
-                role: role,
-                team: team
-            }
-        });
-    }
-
-    fetchSocketData(data) {
-        const { players, goals, status, startGame } = data;
-
-        this.setState({
-            goals,
-            status,
-            startGame
-        });
-        this.setPlayers(players);
-    }
-
-    setPlayers(players) {
-        const slots = {
-            red: {
-                attack: null,
-                def: null
-            },
-            black: {
-                attack: null,
-                def: null
-            }
-        };
-
-        players.forEach(player => {
-            if (player.team === 'BLACK') {
-                if (player.role === 'attack') {
-                    slots.black.attack = player;
-                } else {
-                    slots.black.def = player;
-                }
-            } else {
-                if (player.role === 'attack') {
-                    slots.red.attack = player;
-                } else {
-                    slots.red.def = player;
-                }
-            }
-        });
-
-        this.setState({
-            redAttack: slots.red.attack,
-            redDef: slots.red.def,
-            blackAttack: slots.black.attack,
-            blackDef: slots.black.def
-        });
-    }
-
-    getGoalCount() {
-        const redTeamGoals = this.state.goals.filter(item => item.team === 'RED').length
-        const blackTeamGoals = this.state.goals.filter(item => item.team === 'BLACK').length
-        return `${redTeamGoals} : ${blackTeamGoals} | ${this.state.status}`
+        this.timer = setInterval(
+            () =>
+                this.setState({
+                    time: this.props.startGame
+                        ? Date.now() - new Date(this.props.startGame)
+                        : NOT_A_DATE
+                }),
+            1
+        );
     }
 
     render() {
-        const { redAttack, redDef, blackAttack, blackDef, goals, status, startGame } = this.state;
-        console.log(redAttack);
+        const { startGame, goals, joinAs, getGoalCount } = this.props;
+        const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
+
         return (
             <div id="game_root" className="game_root">
-                <Title pageTitle={this.getGoalCount()} />
+                <Title pageTitle={getGoalCount()} />
                 <div className="game_table">
-                    <Goals goals={goals} status={status} startGame={startGame} />
+                    <Goals goals={goals} startGame={startGame} />
 
                     <div className="game_title">kicker.lan</div>
 
-                    <button
+                    <div
                         className="player_button red attack"
                         disabled={!!redAttack}
-                        onClick={() => {
-                            this.join('attack', 'RED');
-                        }}
+                        onClick={() => joinAs('attack', 'RED')}
                     >
                         {!!redAttack ? (
                             <React.Fragment>
-                            <img alt=" " className="ava" src={playerRedImg} />
-                            <span className="role_name">{redAttack.user.login} ({redAttack.user.rating})</span>
+                                <img alt=" " className="ava" src={playerRedImg}/>
+                                <span className="role_name">
+                                    {redAttack.user.login} ({redAttack.user.rating})
+                                </span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <img alt=" " className="ava_role_attack" src={attackImg} />
                                 <p className="role-char">+</p>
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button red defense"
                         disabled={!!redDef}
-                        onClick={() => {
-                            this.join('defense', 'RED');
-                        }}
+                        onClick={() => joinAs('defense', 'RED')}
                     >
                         {!!redDef ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={playerRedImg} />
-                                <span className="role_name">{redDef.user.login} ({redDef.user.rating})</span>
+                                <img alt=" " className="ava" src={playerRedImg}/>
+                                <span className="role_name">
+                                    {redDef.user.login} ({redDef.user.rating})
+                                </span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
+                                <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
                                 <p className="role-char">+</p>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button black attack"
                         disabled={!!blackAttack}
-                        onClick={() => {
-                            this.join('attack', 'BLACK');
-                        }}
+                        onClick={() => joinAs('attack', 'BLACK')}
                     >
                         {!!blackAttack ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackAttack.user.login} ({blackAttack.user.rating})</span>
+                                <span className="role_name">
+                                    {blackAttack.user.login} ({blackAttack.user.rating})
+                                </span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <img alt=" " className="ava_role_attack" src={attackImg} />
                                 <p className="role-char">+</p>
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
-                    </button>
-                    <button
+                    </div>
+                    <div
                         className="player_button black defense"
                         disabled={!!blackDef}
-                        onClick={() => {
-                            this.join('defense', 'BLACK');
-                        }}
+                        onClick={() => joinAs('defense', 'BLACK')}
                     >
                         {!!blackDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">{blackDef.user.login} ({blackDef.user.rating})</span>
+                                <span className="role_name">
+                                    {blackDef.user.login} ({blackDef.user.rating})
+                                </span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                {/* <img alt=" " className="ava_role_def" src={defImg} /> */}
+                                <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
                                 <p className="role-char">+</p>
                             </React.Fragment>
                         )}
-                    </button>
+                    </div>
                 </div>
             </div>
         );

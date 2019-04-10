@@ -5,7 +5,7 @@ import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Auth from './auth/Auth';
-import Game from './game/Game';
+import Game from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
 
