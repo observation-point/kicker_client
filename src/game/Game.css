@@ -74,7 +74,6 @@
 .role-char {
     display: block;
     margin: 0;
-    padding-bottom: 5px;
     font-family: monospace;
     font-size: 70px;
 }
