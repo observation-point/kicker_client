@@ -13,7 +13,7 @@
 
 .game_table {
     position: relative;
-    margin: 50px;
+    margin: 50px 55px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -60,23 +60,18 @@
 
 .role_name {
     position: absolute;
-    font-family: monospace;
     font-size: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: -48px;
+    top: 110px;
     background-color: black;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 4px 0;
 }
 
 .role-char {
-    display: block;
-    margin: 0;
-    padding-bottom: 5px;
-    font-family: monospace;
-    font-size: 70px;
+    width: 50%;
+    height: 50%;
 }
 
 img.ava {
@@ -86,11 +81,11 @@ img.ava {
 
 .player_button.red {
     background-color: red;
-    right: -50px;
+    right: -52.5px;
 }
 
 .player_button.black {
-    left: -50px;
+    left: -52.5px;
 }
 
 .player_button.attack.red {
@@ -129,6 +124,9 @@ img.ava {
 }
 
 @media all and (orientation: landscape), all and (max-height: 480px) {
+    .game_table {
+        margin: 55px 50px;
+    }
     .goals {
         font-size: 64px;
     }

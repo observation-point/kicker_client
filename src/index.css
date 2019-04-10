@@ -1,10 +1,21 @@
+@font-face {
+  font-family: Consola; /* Имя шрифта */
+  src: url(consola.ttf); /* Путь к файлу со шрифтом */
+}
+* {
+  font-family: Consola;
+}
+
+*:focus {
+  outline: none;
+}
+
 html,
 body {
   margin: 0;
-  font-family: monospace;
   background-color: black;
   color: white;
-
+  font-family: Consola;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

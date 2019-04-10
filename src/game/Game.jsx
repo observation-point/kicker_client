@@ -2,6 +2,9 @@ import React from 'react';
 import Goals from './Goals';
 import playerImg from './user.svg';
 import playerRedImg from './user_red.svg';
+import plusImg from './plus.svg';
+import plusRedImg from './plus_red.svg';
+
 import Title from '../components/Title';
 
 const NOT_A_DATE = '- : -';
@@ -40,15 +43,13 @@ class Game extends React.Component {
                     >
                         {!!redAttack ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={playerRedImg}/>
-                                <span className="role_name">
-                                    {redAttack.user.login} ({redAttack.user.rating})
-                                </span>
+                            <img alt=" " className="ava" src={playerRedImg} />
+                            <span className="role_name">{redAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_attack" src={attackImg} />
-                                <p className="role-char">+</p>
+                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <img alt=" " className="role-char" src={plusRedImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -60,16 +61,14 @@ class Game extends React.Component {
                     >
                         {!!redDef ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={playerRedImg}/>
-                                <span className="role_name">
-                                    {redDef.user.login} ({redDef.user.rating})
-                                </span>
+                                <img alt=" " className="ava" src={playerRedImg} />
+                                <span className="role_name">{redDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
                                 <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusRedImg} />
                             </React.Fragment>
                         )}
                     </div>
@@ -81,14 +80,12 @@ class Game extends React.Component {
                         {!!blackAttack ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">
-                                    {blackAttack.user.login} ({blackAttack.user.rating})
-                                </span>
+                                <span className="role_name">{blackAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
-                                <img alt=" " className="ava_role_attack" src={attackImg} />
-                                <p className="role-char">+</p>
+                                {/* <img alt=" " className="ava_role_attack" src={attackImg} /> */}
+                                <img alt=" " className="role-char" src={plusImg} />
                                 <span className="role_name">attack</span>
                             </React.Fragment>
                         )}
@@ -101,15 +98,13 @@ class Game extends React.Component {
                         {!!blackDef ? (
                             <React.Fragment>
                                 <img alt=" " className="ava" src={playerImg} />
-                                <span className="role_name">
-                                    {blackDef.user.login} ({blackDef.user.rating})
-                                </span>
+                                <span className="role_name">{blackDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
                             <React.Fragment>
                                 <img alt=" " className="ava_role_def" src={defImg} />
                                 <span className="role_name">defense</span>
-                                <p className="role-char">+</p>
+                                <img alt=" " className="role-char" src={plusImg} />
                             </React.Fragment>
                         )}
                     </div>
