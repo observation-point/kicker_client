@@ -60,7 +60,6 @@
 
 .role_name {
     position: absolute;
-    font-family: monospace;
     font-size: 15px;
     display: flex;
     align-items: center;
@@ -74,7 +73,6 @@
 .role-char {
     display: block;
     margin: 0;
-    font-family: monospace;
     font-size: 70px;
 }
 
