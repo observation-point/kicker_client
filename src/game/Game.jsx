@@ -1,5 +1,7 @@
 import React from 'react';
 import Goals from './Goals';
+import playerImg from './user.svg';
+import playerRedImg from './user_red.svg';
 import plusImg from './plus.svg';
 import plusRedImg from './plus_red.svg';
 import Title from '../components/Title';
@@ -42,7 +44,8 @@ class Game extends React.Component {
                     >
                         {!!redAttack ? (
                             <React.Fragment>
-                            <img alt=" " className="ava" src={redAttack.user.avatar} />
+                            <img alt=" " className="ava" src={redAttack.user.avatar ?
+                            redAttack.user.avatar : playerRedImg} />
                             <span className="role_name">{redAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
@@ -59,7 +62,8 @@ class Game extends React.Component {
                     >
                         {!!redDef ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={redDef.user.avatar} />
+                                <img alt=" " className="ava" src={redDef.user.avatar ?
+                                redDef.user.avatar : playerRedImg} />
                                 <span className="role_name">{redDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
@@ -76,7 +80,8 @@ class Game extends React.Component {
                     >
                         {!!blackAttack ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={blackAttack.user.avatar} />
+                                <img alt=" " className="ava" src={blackAttack.user.avatar ?
+                                blackAttack.user.avatar : playerImg} />
                                 <span className="role_name">{blackAttack.user.fullname}</span>
                             </React.Fragment>
                         ) : (
@@ -93,7 +98,8 @@ class Game extends React.Component {
                     >
                         {!!blackDef ? (
                             <React.Fragment>
-                                <img alt=" " className="ava" src={blackDef.user.avatar} />
+                                <img alt=" " className="ava" src={blackDef.user.avatar ?
+                                blackDef.user.avatar : playerImg} />
                                 <span className="role_name">{blackDef.user.fullname}</span>
                             </React.Fragment>
                         ) : (
