@@ -5,7 +5,7 @@ import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Auth from './auth/Auth';
-import Game from './game/Lobby';
+import Lobby from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
 
@@ -97,7 +97,7 @@ class App extends Component {
                 />
                 {this.state.user ? (
                     <React.Fragment>
-                        <Game
+                        <Lobby
                             goals={this.state.goals}
                             players={this.state.players}
                             status={this.state.status}

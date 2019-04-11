@@ -123,6 +123,50 @@ img.ava {
     top: 20px;
 }
 
+.result-count {
+    position: absolute;
+    top: 30px;
+    font-size: 70px;
+    display: block;
+    margin: 0;
+}
+
+.result-time {
+    font-size: 20px;
+    position: absolute;
+    top: 110px;
+}
+
+.result-players {
+    position: absolute;
+    top: 160px;
+}
+
+.result-player {
+    display: flex;
+    margin: 10px 0;
+}
+
+.result-player-name {
+    width: 180px;
+}
+
+.result-team-black {
+    color: black;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: white;
+}
+
+.result-team-red {
+    color: red;
+}
+
+.next-game {
+    position: absolute;
+    font-size: 20px;
+    bottom: 20px;
+}
+
 @media all and (orientation: landscape), all and (max-height: 480px) {
     .game_table {
         margin: 55px 50px;
@@ -134,6 +178,10 @@ img.ava {
         margin: 20px 0px;
         font-size: 30px;
         color: white;
+    }
+    .result-players {
+        position: absolute;
+        top: 170px;
     }
     .player_button.attack.red {
         top: -50px;

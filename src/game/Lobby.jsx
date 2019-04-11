@@ -21,7 +21,8 @@ class Lobby extends React.Component {
             goals: props.goals,
             status: props.status,
             startGame: props.startGame,
-            gameResult: false
+            gameResult: false,
+            gameResultId: null
         };
     }
 
@@ -36,20 +37,22 @@ class Lobby extends React.Component {
     }
 
     fetchSocketData(data) {
-        const { players, goals, status, startGame } = data;
+        const { id, players, goals, status, startGame } = data;
         
-        if (status === 'finished') {
-            this.setState({
-                gameResult: true
-            });
-        }
-
+        
         this.setState({
             goals,
             status,
             startGame
         });
         this.setPlayers(players);
+
+        if (status === 'finished') {
+            this.setState({
+                gameResult: true,
+                gameId: id
+            });
+        }
 
     }
 
@@ -120,6 +123,7 @@ class Lobby extends React.Component {
     render() {
         const { joinAs, getGoalCount, closeGameResult } = this;
         const {
+            gameId,
             redAttack,
             redDef,
             blackAttack,
@@ -139,7 +143,7 @@ class Lobby extends React.Component {
                 getGoalCount={getGoalCount.bind(this)}
             />
         ) : (
-            <GameResult players={players} goals={goals} closeGameResult={closeGameResult.bind(this)}/>
+            <GameResult id={gameId} closeGameResult={closeGameResult.bind(this)}/>
         );
     }
 }
