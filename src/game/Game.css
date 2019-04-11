@@ -162,9 +162,12 @@ img.ava {
 }
 
 .next-game {
+    display: block;
     position: absolute;
     font-size: 20px;
     bottom: 20px;
+    color: white;
+    text-decoration: none;
 }
 
 @media all and (orientation: landscape), all and (max-height: 480px) {

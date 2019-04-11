@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 
 import Config from '../config/config';
 import axios from 'axios';
@@ -35,16 +36,14 @@ class GameResult extends React.Component {
     }
 
     async componentDidMount() {
-        const { id } = this.props;
+        const { gameId } = this.props.match.params;
 
         const { data: gameData } = await axios({
             method: 'get',
-            url: Config.api_url + '/game/' + id,
+            url: Config.api_url + '/game/' + gameId,
             withCredentials: true
         });
 
-        console.log('GameData: ', gameData);
-    
         const playTime = new Date(gameData.endGame) - new Date(gameData.startGame);
     
         this.setState({
@@ -56,7 +55,6 @@ class GameResult extends React.Component {
     }
 
     render() {
-        const { closeGameResult } = this.props;
         const { goals, playTime, players } = this.state;
 
         const redTeamGoals = goals.filter(goal => goal.team === 'RED');
@@ -75,20 +73,20 @@ class GameResult extends React.Component {
                     <p className="result-time">
                         play time - {`${minutes > 9 ? minutes : '0'+minutes}:${seconds > 9 ? seconds : '0'+seconds}`}
                     </p>
-            <div className="result-players">
-                    {
-                        players.map(item => 
-                            <ResultPLayer role={item.role} team={item.team} user={item.user} />
-                        )
-                    }
+                    <div className="result-players">
+                        {
+                            players.map(item => 
+                                <ResultPLayer role={item.role} team={item.team} user={item.user} />
+                            )
+                        }
 
-            </div>
+                    </div>
 
-                    <div onClick={() => closeGameResult()} className="next-game">next</div>
+                    <a href={"/"} className="next-game">next</a>
                 </div>
             </div>
         )
     }
 }
 
-export default GameResult;
+export default withRouter(GameResult);

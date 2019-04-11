@@ -6,10 +6,10 @@ import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Auth from './auth/Auth';
+import GameResult from './game/GameResult';
 import Lobby from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
-import GameResult from './game/GameResult';
 
 class App extends Component {
 
@@ -105,6 +105,7 @@ class App extends Component {
                             path="/"
                             component={() => (
                                 <Lobby
+                                    user={this.state.user}
                                     goals={this.state.goals}
                                     players={this.state.players}
                                     status={this.state.status}

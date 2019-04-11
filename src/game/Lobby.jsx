@@ -2,10 +2,10 @@ import React from 'react';
 import axios from 'axios';
 import './Game.css';
 import io from 'socket.io-client';
+import { withRouter } from "react-router-dom";
 
 import Game from './Game';
 import Config from '../config/config';
-import GameResult from './GameResult';
 
 let socket = io(Config.socket_url);
 
@@ -14,16 +14,13 @@ class Lobby extends React.Component {
         super(props);
 
         this.state = {
-            user: null,
             redAttack: null,
             redDef: null,
             blackAttack: null,
             blackDef: null,
             goals: props.goals,
             status: props.status,
-            startGame: props.startGame,
-            gameResult: false,
-            gameResultId: null
+            startGame: props.startGame
         };
     }
 
@@ -53,8 +50,9 @@ class Lobby extends React.Component {
                 gameResult: true,
                 gameId: id
             });
-        }
 
+            this.props.history.push(`/game/${id}`);
+        }
     }
 
     setPlayers(players) {
@@ -104,38 +102,35 @@ class Lobby extends React.Component {
     }
 
     async joinAs(role, team) {
-        await axios({
-            method: 'post',
-            url: `${Config.api_url}/game`,
-            withCredentials: true,
-            data: {
-                role: role,
-                team: team
-            }
-        });
-    }
 
-    closeGameResult() {
-        this.setState({
-            gameResult: false
-        });
+        if (!this.props.user) {
+            this.props.history.push('/login');
+        } else {
+            await axios({
+                method: 'post',
+                url: `${Config.api_url}/game`,
+                withCredentials: true,
+                data: {
+                    role: role,
+                    team: team
+                }
+            });
+        }
     }
 
     render() {
-        const { joinAs, getGoalCount, closeGameResult } = this;
+        const { joinAs, getGoalCount } = this;
         const {
-            gameId,
             redAttack,
             redDef,
             blackAttack,
             blackDef,
             goals,
-            gameResult,
             startGame
         } = this.state;
         const players = { redAttack, redDef, blackAttack, blackDef };
 
-        return !gameResult ? (
+        return (
             <Game
                 startGame={startGame}
                 goals={goals}
@@ -143,10 +138,8 @@ class Lobby extends React.Component {
                 joinAs={joinAs.bind(this)}
                 getGoalCount={getGoalCount.bind(this)}
             />
-        ) : (
-            <GameResult id={gameId} closeGameResult={closeGameResult.bind(this)}/>
         );
     }
 }
 
-export default Lobby;
+export default withRouter(Lobby);
