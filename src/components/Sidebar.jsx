@@ -26,7 +26,7 @@ export default props => {
                 <div className="menu-profile">
                     <h2>{user.fullname}</h2>
                     <h3>{user.rating}</h3>
-                    <img alt=" " className="menu-profile-ava" src={playerImg} />
+                    <img alt=" " className="menu-profile-ava" src={user.avatar ? user.avatar : playerImg} />
                 </div>
             ) : null}
             {user ? (
