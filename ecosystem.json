@@ -19,7 +19,7 @@
       "user": "gorod",
       "host": ["kicker.lan"],
       "ssh_options": "StrictHostKeyChecking=no",
-      "ref": "origin/master",
+      "ref": "origin/routsult",
       "repo": "git@github.com:observation-point/kicker_client.git",
       "path": "/home/gorod/kicker_client",
       "pre-setup": "echo 'PRE SETUP'",
