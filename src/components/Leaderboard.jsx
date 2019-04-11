@@ -28,6 +28,8 @@ class Leaderboard extends Component {
     render() {
         const { usersStats } = this.state;
         // interface UserStats {
+        //   userId: number;
+        //   avatar: string;
         //   fullname: string;
         //   rating: number;
         //   gamesCount: number;
@@ -41,8 +43,8 @@ class Leaderboard extends Component {
                     <table className={'Table'}>
                         <thead>
                           <tr>
-                            {Object.keys(usersStats[0]).map((field, index) => (
-                                <th key={index}>{field}</th>
+                            {Object.keys(usersStats[0]).map((title) => (
+                                <th key={title}>{title}</th>
                             ))}
                           </tr>
                         </thead>
@@ -51,11 +53,11 @@ class Leaderboard extends Component {
                                 return (
                                     <>
                                       <tr>
-                                        <td key={index}>{field.fullname}</td>
-                                        <td key={index}>{field.rating}</td>
-                                        <td key={index}>{field.gamesCount}</td>
-                                        <td key={index}>{field.winsInAttack}</td>
-                                        <td key={index}>{field.winsInDefense}</td>
+                                        <td key={field.userId + index}>{field.fullname}</td>
+                                        <td key={field.userId + index}>{field.rating}</td>
+                                        <td key={field.userId + index}>{field.gamesCount}</td>
+                                        <td key={field.userId + index}>{field.winsInAttack}</td>
+                                        <td key={field.userId + index}>{field.winsInDefense}</td>
                                       </tr>
                                     </>
                                 );
