@@ -41,11 +41,16 @@ export default props => {
                 </a>
             ) : null}
 
+            {!user ? (
+                <a onClick={handleLogout} className="menu-item" href="/login">
+                    Login
+                </a>
+            ) : null}
             <a className="menu-item" href="/">
-                Game
+                Lobby
             </a>
 
-            <a className="menu-item" href="/">
+            <a className="menu-item" href="/leaderboard">
                 Leaderboard
             </a>
         </Menu>

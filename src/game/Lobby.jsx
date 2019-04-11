@@ -14,6 +14,7 @@ class Lobby extends React.Component {
         super(props);
 
         this.state = {
+            user: null,
             redAttack: null,
             redDef: null,
             blackAttack: null,
