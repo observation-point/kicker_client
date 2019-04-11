@@ -14,13 +14,15 @@ class Lobby extends React.Component {
         super(props);
 
         this.state = {
+            user: null,
             redAttack: null,
             redDef: null,
             blackAttack: null,
             blackDef: null,
-            goals: props.goals,
-            status: props.status,
-            startGame: props.startGame,
+            players: [],
+            goals: [],
+            status: null,
+            startGame: null,
             gameResult: false
         };
     }

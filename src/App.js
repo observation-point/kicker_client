@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Auth from './auth/Auth';
-import Game from './game/Lobby';
-
-console.log('TARGET: ', window.location.hostname);
+import Lobby from './game/Lobby';
+import GameResult from './game/GameResult';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
 
+    constructor(props) {
+        super(props)
         this.state = {
             user: null,
-            goals: [],
             players: [],
+            goals: [],
             status: null,
-            startGame: null
+            startGame: null,
         };
     }
 
     async componentDidMount() {
+
         const { data: userData } = await axios({
             method: 'get',
             url: Config.api_url + '/auth',
@@ -88,26 +89,39 @@ class App extends Component {
         };
 
         return (
-            <div id="App">
-                <Sidebar
-                    pageWrapId={'game_root'}
-                    outerContainerId={'App'}
-                    userProfile={userProfile}
-                    menuOptions={menuOptions}
-                />
-                {this.state.user ? (
-                    <React.Fragment>
-                        <Game
-                            goals={this.state.goals}
-                            players={this.state.players}
-                            status={this.state.status}
-                            startGame={this.state.startGame}
+            <Router>
+                <div id="App">
+                    <Sidebar
+                        pageWrapId={'game_root'}
+                        outerContainerId={'App'}
+                        userProfile={userProfile}
+                        menuOptions={menuOptions}
+                    />
+                    <Switch>
+                        <Route
+                            exact
+                            path="/"
+                            component={() => (
+                                <Lobby
+                                    goals={this.state.goals}
+                                    players={this.state.players}
+                                    status={this.state.status}
+                                    startGame={this.state.startGame}
+                                />
+                            )}
                         />
-                    </React.Fragment>
-                ) : (
-                    <Auth onLogin={this.onLogin.bind(this)} />
-                )}
-            </div>
+                        <Route
+                            path="/login/"
+                            component={() => (
+                                <Auth onLogin={this.onLogin.bind(this)} />
+                            )}
+                        />
+                        <Route path="/game/:gameId/" component={GameResult} />
+
+                        <Redirect from="*" to="/" />
+                    </Switch>
+                </div>
+            </Router>
         );
     }
 }

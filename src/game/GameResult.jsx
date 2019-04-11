@@ -3,14 +3,14 @@ import React from 'react';
 class GameResult extends React.Component {
 
     render() {
-        const { goals, closeGameResult } = this.props;
-        const redTeamGoals = goals.filter(goal => goal.team === 'RED');
-        const blackTeamGoals = goals.filter(goal => goal.team === 'BLACK');
+        // const { goals, closeGameResult } = this.props;
+        // const redTeamGoals = goals.filter(goal => goal.team === 'RED');
+        // const blackTeamGoals = goals.filter(goal => goal.team === 'BLACK');
 
         return (
             <div className="gameResult">
-                <button onClick={() => closeGameResult()} />
-                <h1>{redTeamGoals} - {blackTeamGoals}</h1>
+                <a href="/"><button>Lobby</button></a>
+                <h1>5 - 0</h1>
             </div>
         )
     }
