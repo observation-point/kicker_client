@@ -27,8 +27,6 @@ class Game extends React.Component {
         const { startGame, goals, joinAs, getGoalCount } = this.props;
         const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
 
-        console.log(this.props.players);
-
         return (
             <div id="game_root" className="game_root">
                 <Title pageTitle={getGoalCount()} />
