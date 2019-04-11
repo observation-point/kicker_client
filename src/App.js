@@ -5,6 +5,8 @@ import './App.css';
 import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
+import Leaderboard from './components/Leaderboard';
+
 import Auth from './auth/Auth';
 import GameResult from './game/GameResult';
 import Lobby from './game/Lobby';
@@ -120,6 +122,7 @@ class App extends Component {
                             )}
                         />
                         <Route path="/game/:gameId/" component={GameResult} />
+                        <Route path="/leaderboard/" component={Leaderboard} />
 
                         <Redirect from="*" to="/" />
                     </Switch>
