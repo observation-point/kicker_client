@@ -21,8 +21,10 @@
     position: fixed;
     height: 20px;
     right: 14px;
-    top: 20px;
+    bottom: 15px;
     width: 25px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Color/shape of burger icon bars */

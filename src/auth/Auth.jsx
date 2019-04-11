@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import Field from './Field';
 import Config from '../config/config';
@@ -33,6 +34,8 @@ class Auth extends React.Component {
             });
 
             this.props.onLogin(data.user);
+            this.props.history.push('/');
+
         } else {
             const { data } = await axios({
                 method: 'post',
@@ -116,4 +119,4 @@ class Auth extends React.Component {
     }
 }
 
-export default Auth;
+export default withRouter(Auth);
