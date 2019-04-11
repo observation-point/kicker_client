@@ -19,7 +19,7 @@
       "user": "gorod",
       "host": ["www109.lan"],
       "ssh_options": "StrictHostKeyChecking=no",
-      "ref": "origin/gameresult",
+      "ref": "origin/master",
       "repo": "git@github.com:observation-point/kicker_client.git",
       "path": "/home/gorod/kicker_client",
       "pre-setup": "echo 'PRE SETUP'",
