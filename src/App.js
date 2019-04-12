@@ -15,7 +15,7 @@ console.log('TARGET: ', window.location.hostname);
 
 const WithToken = ({match}) => {
     const token = match.params.token;
-    console.log(match.params);
+    console.log(token);
     const [user, setUser] = React.useState(null);
 
     axios({
@@ -25,7 +25,7 @@ const WithToken = ({match}) => {
         body: {token}
     }).then(({data}) => setUser(data.user));
 
-    return user && <Redirect to={'/'} />;
+    return user ? <Redirect to={'/'} /> : <Redirect to={'/login'} />;
 }
 
 class App extends Component {
