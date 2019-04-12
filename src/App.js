@@ -15,6 +15,7 @@ console.log('TARGET: ', window.location.hostname);
 
 const WithToken = ({match}) => {
     const token = match.params.token;
+    console.log(match.params);
     const [user, setUser] = React.useState(null);
 
     axios({
