@@ -27,7 +27,7 @@ const WithToken = ({match}) => {
 
     console.log(user);
     
-    return user ? <Redirect to={'/'} /> : <Redirect to={'/login'} />;
+    return user && <Redirect to={'/'} />;
 }
 
 class App extends Component {
