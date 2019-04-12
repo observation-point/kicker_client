@@ -11,6 +11,20 @@ import Lobby from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
 
+const WithToken = ({match}) => {
+    const token = match.params.token;
+    const [user, setUser] = React.useState(null);
+
+    axios({
+        method: 'post',
+        url: Config.api_url + '/auth/token',
+        withCredentials: true,
+        body: {token}
+    }).then(({data}) => setUser(data.user));
+
+    return user && <Redirect to={'/'} />;
+}
+
 class App extends Component {
 
     constructor(props) {
@@ -25,7 +39,7 @@ class App extends Component {
     }
 
     async componentDidMount() {
-
+        console.log(window.location);
         const { data: userData } = await axios({
             method: 'get',
             url: Config.api_url + '/auth',
@@ -120,6 +134,7 @@ class App extends Component {
                             )}
                         />
                         <Route path="/game/:gameId/" component={GameResult} />
+                        <Route path="/token/:token/" component={WithToken} />
 
                         <Redirect from="*" to="/" />
                     </Switch>
