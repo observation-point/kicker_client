@@ -25,6 +25,8 @@ const WithToken = ({match}) => {
         data: {token}
     }).then(({data}) => setUser(data.user));
 
+    console.log(user);
+    
     return user ? <Redirect to={'/'} /> : <Redirect to={'/login'} />;
 }
 
