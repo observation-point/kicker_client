@@ -22,7 +22,7 @@ const WithToken = ({match}) => {
         method: 'post',
         url: Config.api_url + '/auth/token',
         withCredentials: true,
-        body: {token}
+        data: {token}
     }).then(({data}) => setUser(data.user));
 
     return user ? <Redirect to={'/'} /> : <Redirect to={'/login'} />;
