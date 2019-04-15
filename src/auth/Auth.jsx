@@ -26,7 +26,7 @@ class Auth extends React.Component {
 
             const { data } = await axios({
                 method: 'post',
-                url: `${apiUrl}/auth/${login}`,
+                url: `${apiUrl}/auth/login/${login}`,
                 withCredentials: true,
                 data: {
                     password: password
