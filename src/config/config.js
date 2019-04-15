@@ -1,8 +1,7 @@
-const apiUrl = window.location.hostname === 'kicker.lan' ?
-    `http://${window.location.hostname}/api` :
-    `http://${window.location.hostname}:8888/api`;
+const apiUrl = `http://${window.location.hostname}/api`;
+const socketUrl = `http://${window.location.hostname}/socket`;
 
 export default {
     api_url: apiUrl,
-    socket_url: `http://${window.location.hostname}:8889`
-}
+    socket_url: socketUrl
+};
