@@ -64,7 +64,7 @@ class App extends Component {
             startGame: gameData.startGame
         });
 
-        socket.on('update_rating', async (data) => {
+        socket.on('update_rating', async () => {
 
             const { data: userData } = await axios({
                 method: 'get',

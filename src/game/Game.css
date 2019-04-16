@@ -171,6 +171,16 @@ img.ava {
     text-decoration: none;
 }
 
+a.next {
+    color: white;
+    text-decoration: none;
+}
+
+a.play-again {
+    color: white;
+    text-decoration: none;
+}
+
 @media all and (orientation: landscape), all and (max-height: 480px) {
     .game_table {
         margin: 55px 50px;
