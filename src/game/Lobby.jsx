@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 import Game from './Game';
 import Config from '../config/config';
 
-let socket = io(Config.socket_url);
+export const socket = io(Config.socket_url);
 
 class Lobby extends React.Component {
     constructor(props) {

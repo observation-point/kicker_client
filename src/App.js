@@ -9,7 +9,7 @@ import Leaderboard from './components/Leaderboard';
 
 import Auth from './auth/Auth';
 import GameResult from './game/GameResult';
-import Lobby from './game/Lobby';
+import Lobby, { socket } from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
 
@@ -44,7 +44,6 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        console.log(window.location);
         const { data: userData } = await axios({
             method: 'get',
             url: Config.api_url + '/auth',
@@ -63,6 +62,18 @@ class App extends Component {
             goals: gameData.goals,
             status: gameData.status,
             startGame: gameData.startGame
+        });
+
+        socket.on('update_rating', async (data) => {
+
+            const { data: userData } = await axios({
+                method: 'get',
+                url: Config.api_url + '/auth',
+                withCredentials: true
+            });
+            this.setState({
+                user: userData.user
+            });
         });
     }
 
