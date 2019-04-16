@@ -1,4 +1,4 @@
-const target_local = window.location.hostname === 'kicker.lan';
+const target_local = window.location.hostname.indexOf('kicker') !== -1;
 
 const apiUrl = target_local ?
     `http://${window.location.hostname}/api` :
