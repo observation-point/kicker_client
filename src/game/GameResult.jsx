@@ -101,7 +101,7 @@ class GameResult extends React.Component {
                     </div>
                     <div className="next-game">
                     <a href={"/"} className="next" onClick={() => this.nextGameAction()}>next</a>
-                        |
+                         | 
                     <a href={"/"} className="play-again" onClick={() => this.playAgainAction()}>play again</a>
                     </div>
                 </div>
