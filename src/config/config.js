@@ -1,5 +1,5 @@
-const apiUrl = `http://${window.location.hostname}/api`;
-const socketUrl = `http://${window.location.hostname}`;
+const apiUrl = `${window.origin}/api`;
+const socketUrl = `${window.origin}`;
 
 export default {
     api_url: apiUrl,
