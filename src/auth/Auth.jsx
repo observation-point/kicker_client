@@ -49,6 +49,7 @@ class Auth extends React.Component {
             });
 
             this.props.onLogin(data.user);
+            this.props.history.push('/');
         }
     }
 

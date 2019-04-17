@@ -54,6 +54,24 @@ class GameResult extends React.Component {
 
     }
 
+    async nextGameAction() {
+        await axios({
+            method: 'post',
+            url: Config.api_url + '/game/new',
+            withCredentials: true,
+            data: { type: 'next' }
+        });
+    }
+
+    async playAgainAction() {
+        await axios({
+            method: 'post',
+            url: Config.api_url + '/game/new',
+            withCredentials: true,
+            data: { type: 'play_again' }
+        });
+    }
+
     render() {
         const { goals, playTime, players } = this.state;
 
@@ -81,8 +99,11 @@ class GameResult extends React.Component {
                         }
 
                     </div>
-
-                    <a href={"/"} className="next-game">next</a>
+                    <div className="next-game">
+                    <a href={"/"} className="next" onClick={() => this.nextGameAction()}>next</a>
+                         | 
+                    <a href={"/"} className="play-again" onClick={() => this.playAgainAction()}>play again</a>
+                    </div>
                 </div>
             </div>
         )
