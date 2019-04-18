@@ -55,7 +55,7 @@ class Leaderboard extends Component {
                                 return (
                                     <>
                                       <tr>
-                                        <td style={'text-algin: left;'} key={field.userId + index}>{field.fullname}</td>
+                                        <td style={{ textAlign: 'left' }} key={field.userId + index}>{field.fullname}</td>
                                         <td key={field.userId + index}>{field.rating}</td>
                                         <td key={field.userId + index}>{field.gamesCount}</td>
                                         <td key={field.userId + index}>{field.winsInAttack}</td>
