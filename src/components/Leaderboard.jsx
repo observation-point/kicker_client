@@ -40,7 +40,7 @@ class Leaderboard extends Component {
         return (
             <div className="leaderboard">
                 {usersStats ? (
-                    <table className={'Table'}>
+                    <table className={'Table'} cellpadding="5">
                         <thead>
                           <tr>
                             <th>User</th>
