@@ -9,6 +9,37 @@ import Config from '../config/config';
 
 export const socket = io(Config.socket_url);
 
+const getSlots = (players) => {
+    const slots = {
+        red: {
+            attack: null,
+            def: null
+        },
+        black: {
+            attack: null,
+            def: null
+        }
+    };
+
+    players.forEach(player => {
+        if (player.team === 'BLACK') {
+            if (player.role === 'attack') {
+                slots.black.attack = player;
+            } else {
+                slots.black.def = player;
+            }
+        } else {
+            if (player.role === 'attack') {
+                slots.red.attack = player;
+            } else {
+                slots.red.def = player;
+            }
+        }
+    });
+
+    return slots;
+}
+
 class Lobby extends React.Component {
     constructor(props) {
         super(props);
@@ -25,25 +56,31 @@ class Lobby extends React.Component {
     }
 
     componentDidMount() {
-        const { players, goals, status } = this.props;
+        const { goals, status } = this.props;
         this.setState({
             status,
             goals
         });
-        this.setPlayers(players);
+
         socket.on('updated_game', this.fetchSocketData.bind(this));
     }
 
     fetchSocketData(data) {
+        console.log('fetchSocketData');
+
         const { id, players, goals, status, startGame } = data;
-        
-        
+
+        const slots = getSlots(players);
+
         this.setState({
             goals,
             status,
-            startGame
+            startGame,
+            redAttack: slots.red.attack,
+            redDef: slots.red.def,
+            blackAttack: slots.black.attack,
+            blackDef: slots.black.def
         });
-        this.setPlayers(players);
 
         if (status === 'finished') {
             this.setState({
@@ -53,44 +90,6 @@ class Lobby extends React.Component {
 
             this.props.history.push(`/game/${id}`);
         }
-    }
-
-    setPlayers(players) {
-        console.log('set players', players);
-
-        const slots = {
-            red: {
-                attack: null,
-                def: null
-            },
-            black: {
-                attack: null,
-                def: null
-            }
-        };
-
-        players.forEach(player => {
-            if (player.team === 'BLACK') {
-                if (player.role === 'attack') {
-                    slots.black.attack = player;
-                } else {
-                    slots.black.def = player;
-                }
-            } else {
-                if (player.role === 'attack') {
-                    slots.red.attack = player;
-                } else {
-                    slots.red.def = player;
-                }
-            }
-        });
-
-        this.setState({
-            redAttack: slots.red.attack,
-            redDef: slots.red.def,
-            blackAttack: slots.black.attack,
-            blackDef: slots.black.def
-        });
     }
 
     getGoalCount() {
@@ -132,7 +131,7 @@ class Lobby extends React.Component {
             startGame
         } = this.state;
         const players = { redAttack, redDef, blackAttack, blackDef };
-
+        console.log('render lobby, players: ', players);
         return (
             <Game
                 startGame={startGame}
