@@ -130,7 +130,7 @@ class App extends Component {
                 method: () => this.logout(),
             },
             stopGame: {
-                show: !!userProfile,
+                show: !!userProfile && isInLobby,
                 method: () => this.stopgame(),
             },
             goAway: {
