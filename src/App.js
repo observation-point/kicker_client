@@ -123,7 +123,7 @@ class App extends Component {
                 method: () => this.stopgame(),
             },
             goAway: {
-                show: !!userProfile && players.find(player => player.user.id === user.id) && status === 'ready',
+                show: !!userProfile && players.find(player => player.user.id === userProfile.id) && status === 'ready',
                 method: () => this.goAway()
             }
         };
