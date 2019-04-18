@@ -40,6 +40,7 @@ class App extends Component {
             goals: [],
             status: null,
             startGame: null,
+            isInLobby: false 
         };
     }
 
@@ -61,7 +62,8 @@ class App extends Component {
             players: gameData.players,
             goals: gameData.goals,
             status: gameData.status,
-            startGame: gameData.startGame
+            startGame: gameData.startGame,
+            isInLobby: !!gameData.players.find(player => player.user.id === userData.user.id)
         });
 
         socket.on('update_rating', async () => {
@@ -83,12 +85,21 @@ class App extends Component {
         });
     }
 
+    enterToLobby() {
+        this.setState({
+            isInLobby: true
+        })
+    }
+
     async goAway() {
         await axios({
             method: 'delete',
             url: `${Config.api_url}/game`,
             withCredentials: true
         });
+        this.setState({
+            isInLobby: false
+        })
     }
 
     async stopgame() {
@@ -112,7 +123,7 @@ class App extends Component {
     }
 
     render() {
-        const { user: userProfile, players, status } = this.state;
+        const { user: userProfile, isInLobby, status } = this.state;
         const menuOptions = {
             logout: {
                 show: !!userProfile,
@@ -123,7 +134,7 @@ class App extends Component {
                 method: () => this.stopgame(),
             },
             goAway: {
-                show: !!userProfile && players.find(player => player.user.id === userProfile.id) && status === 'ready',
+                show: !!userProfile && isInLobby && status === 'ready',
                 method: () => this.goAway()
             }
         };
@@ -148,6 +159,7 @@ class App extends Component {
                                     players={this.state.players}
                                     status={this.state.status}
                                     startGame={this.state.startGame}
+                                    enterToLobby={this.enterToLobby.bind(this)}
                                 />
                             )}
                         />

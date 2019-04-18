@@ -102,9 +102,9 @@ class Lobby extends React.Component {
     }
 
     async joinAs(role, team) {
-
-        if (!this.props.user) {
-            this.props.history.push('/login');
+        const { user, history, enterToLobby } = this.props;
+        if (!user) {
+            history.push('/login');
         } else {
             await axios({
                 method: 'post',
@@ -115,6 +115,7 @@ class Lobby extends React.Component {
                     team: team
                 }
             });
+            enterToLobby();
         }
     }
 
