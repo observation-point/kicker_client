@@ -30,19 +30,13 @@ export default props => {
                 </div>
             ) : null}
             {user ? (
-                <a onClick={handleStopGame} className="menu-item" href="/">
+                <a onClick={handleStopGame} className="menu-item">
                     Stop game
                 </a>
             ) : null}
 
-            {user ? (
-                <a onClick={handleLogout} className="menu-item" href="/">
-                    Logout
-                </a>
-            ) : null}
-
             {!user ? (
-                <a onClick={handleLogout} className="menu-item" href="/login">
+                <a className="menu-item" href="/login">
                     Login
                 </a>
             ) : null}
@@ -53,6 +47,12 @@ export default props => {
             <a className="menu-item" href="/leaderboard">
                 Leaderboard
             </a>
+
+            {user ? (
+                <a onClick={handleLogout} className="menu-item">
+                    Logout
+                </a>
+            ) : null}
         </Menu>
     );
 };
