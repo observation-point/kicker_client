@@ -30,8 +30,6 @@ export default props => {
                 </div>
             ) : null}
 
-            // Game options:
-
             {showGoAway ? (
                 <a onClick={handleGoAway} className="menu-item">
                     Go away
@@ -43,8 +41,6 @@ export default props => {
                     Stop game
                 </a>
             ) : null}
-
-            // Other options:
 
             {!userProfile ? (
                 <a className="menu-item" href="/login">
