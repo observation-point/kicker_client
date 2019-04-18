@@ -43,9 +43,11 @@ class Leaderboard extends Component {
                     <table className={'Table'}>
                         <thead>
                           <tr>
-                            {Object.keys(usersStats[0]).map((title) => (
-                                <th key={title}>{title}</th>
-                            ))}
+                            <th>User</th>
+                            <th>Rating</th>
+                            <th>Games</th>
+                            <th>Wins(A)</th>
+                            <th>Wins(D)</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -53,7 +55,7 @@ class Leaderboard extends Component {
                                 return (
                                     <>
                                       <tr>
-                                        <td key={field.userId + index}>{field.fullname}</td>
+                                        <td style={'text-algin: left;'} key={field.userId + index}>{field.fullname}</td>
                                         <td key={field.userId + index}>{field.rating}</td>
                                         <td key={field.userId + index}>{field.gamesCount}</td>
                                         <td key={field.userId + index}>{field.winsInAttack}</td>

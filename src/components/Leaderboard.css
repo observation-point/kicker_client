@@ -1,3 +1,13 @@
 .leaderboard {
-  text-align: center
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+table { 
+  border-collapse: collapse; 
+}
+
+thead {
+  border-bottom: 2px solid whitesmoke;
 }
