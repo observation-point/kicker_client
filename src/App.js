@@ -83,6 +83,22 @@ class App extends Component {
         });
     }
 
+    async goAway() {
+        await axios({
+            method: 'delete',
+            url: `${Config.api_url}/game`,
+            withCredentials: true
+        });
+    }
+
+    async stopgame() {
+        await axios({
+            method: 'post',
+            url: `${Config.api_url}/game/stop`,
+            withCredentials: true
+        });
+    }
+
     async logout() {
         await axios({
             method: 'get',
@@ -95,28 +111,20 @@ class App extends Component {
         });
     }
 
-    async stopgame() {
-        await axios({
-            method: 'post',
-            url: `${Config.api_url}/game/stop`,
-            withCredentials: true
-        });
-    }
-
     render() {
-        const { user: userProfile } = this.state;
+        const { user: userProfile, players, status } = this.state;
         const menuOptions = {
             logout: {
-                title: 'Logout',
-                method: () => {
-                    this.logout();
-                }
+                show: !!user,
+                method: () => this.logout(),
             },
             stopGame: {
-                title: 'Stop game',
-                method: () => {
-                    this.stopgame();
-                }
+                show: !!user,
+                method: () => this.stopgame(),
+            },
+            goAway: {
+                show: !!user && players.find(player => player.user.id === user.id) && status === 'ready',
+                method: () => this.goAway()
             }
         };
 

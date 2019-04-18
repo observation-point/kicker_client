@@ -4,11 +4,12 @@ import './Sidebar.css';
 import playerImg from '../game/user.svg';
 
 export default props => {
-    const user = props.userProfile;
-    const handleStopGame = props.menuOptions.stopGame.method;
-    const handleLogout = props.menuOptions.logout.method;
+    const userProfile = props.userProfile;
+    const { show: showStopGame, method: handleStopGame } = props.menuOptions.stopGame;
+    const { show: showLogout, method: handleLogout } = props.menuOptions.logout;
+    const { show: showGoAway, method: handleGoAway } = props.menuOptions.goAway;
 
-    var styles = {
+    const styles = {
         bmBurgerBars: {
             height: '8%'
         },
@@ -20,26 +21,37 @@ export default props => {
         }
     }
     return (
-        // Pass on our props
         <Menu right styles={ styles }>
-            {user ? (
+            {userProfile ? (
                 <div className="menu-profile">
-                    <h2>{user.fullname}</h2>
-                    <h3>{user.rating}</h3>
-                    <img alt=" " className="menu-profile-ava" src={user.avatar ? user.avatar : playerImg} />
+                    <h2>{userProfile.fullname}</h2>
+                    <h3>{userProfile.rating}</h3>
+                    <img alt=" " className="menu-profile-ava" src={userProfile.avatar ? userProfile.avatar : playerImg} />
                 </div>
             ) : null}
-            {user ? (
+
+            // Game options:
+
+            {showGoAway ? (
+                <a onClick={handleGoAway} className="menu-item">
+                    Go away
+                </a>
+            ) : null}
+
+            {showStopGame ? (
                 <a onClick={handleStopGame} className="menu-item">
                     Stop game
                 </a>
             ) : null}
 
-            {!user ? (
+            // Other options:
+
+            {!userProfile ? (
                 <a className="menu-item" href="/login">
                     Login
                 </a>
             ) : null}
+
             <a className="menu-item" href="/">
                 Lobby
             </a>
@@ -48,7 +60,7 @@ export default props => {
                 Leaderboard
             </a>
 
-            {user ? (
+            {showLogout ? (
                 <a onClick={handleLogout} className="menu-item">
                     Logout
                 </a>
