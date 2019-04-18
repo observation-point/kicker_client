@@ -35,6 +35,8 @@ class Lobby extends React.Component {
     }
 
     fetchSocketData(data) {
+
+        console.warn(data);
         const { id, players, goals, status, startGame } = data;
         
         
@@ -56,6 +58,8 @@ class Lobby extends React.Component {
     }
 
     setPlayers(players) {
+        console.debug('set players', players);
+
         const slots = {
             red: {
                 attack: null,
