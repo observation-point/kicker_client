@@ -115,15 +115,15 @@ class App extends Component {
         const { user: userProfile, players, status } = this.state;
         const menuOptions = {
             logout: {
-                show: !!user,
+                show: !!userProfile,
                 method: () => this.logout(),
             },
             stopGame: {
-                show: !!user,
+                show: !!userProfile,
                 method: () => this.stopgame(),
             },
             goAway: {
-                show: !!user && players.find(player => player.user.id === user.id) && status === 'ready',
+                show: !!userProfile && players.find(player => player.user.id === user.id) && status === 'ready',
                 method: () => this.goAway()
             }
         };
