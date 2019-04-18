@@ -55,15 +55,18 @@ class Lobby extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        socket.on('updated_game', this.fetchSocketData.bind(this));
+    }
+    
+    componentWillReceiveProps() {
         const { goals, status } = this.props;
         this.setState({
             status,
             goals
         });
-
-        socket.on('updated_game', this.fetchSocketData.bind(this));
     }
+
 
     fetchSocketData(data) {
         console.log('fetchSocketData');
@@ -72,52 +75,45 @@ class Lobby extends React.Component {
 
         const slots = getSlots(players);
 
-        this.setState({
-            goals,
-            status,
-            startGame,
-            redAttack: slots.red.attack,
-            redDef: slots.red.def,
-            blackAttack: slots.black.attack,
-            blackDef: slots.black.def
-        });
+        if (players.length !== this.props.players.length || goals.length !== this.state.goals.length) {
+            this.setState({
+                goals,
+                status,
+                startGame,
+                redAttack: slots.red.attack,
+                redDef: slots.red.def,
+                blackAttack: slots.black.attack,
+                blackDef: slots.black.def
+            });
+        }
 
         if (status === 'finished') {
             this.setState({
                 gameResult: true,
                 gameId: id
             });
-
             this.props.history.push(`/game/${id}`);
         }
     }
 
     getGoalCount() {
-        const redTeamGoals = this.state.goals.filter(
-            item => item.team === 'RED'
-        ).length;
-        const blackTeamGoals = this.state.goals.filter(
-            item => item.team === 'BLACK'
-        ).length;
+        const redTeamGoals = this.state.goals.filter(item => item.team === 'RED').length;
+        const blackTeamGoals = this.state.goals.filter(item => item.team === 'BLACK').length;
         return `${redTeamGoals} : ${blackTeamGoals} | ${this.state.status}`;
     }
 
-    async joinAs(role, team) {
-        const { user, history, enterToLobby } = this.props;
-        if (!user) {
-            history.push('/login');
-        } else {
-            await axios({
-                method: 'post',
-                url: `${Config.api_url}/game`,
-                withCredentials: true,
-                data: {
-                    role: role,
-                    team: team
-                }
-            });
-            enterToLobby();
-        }
+    joinAs(role, team) {
+        const {  enterToLobby } = this.props;
+        axios({
+            method: 'post',
+            url: `${Config.api_url}/game`,
+            withCredentials: true,
+            data: {
+                role: role,
+                team: team
+            }
+        });
+        enterToLobby();
     }
 
     render() {
@@ -131,7 +127,9 @@ class Lobby extends React.Component {
             startGame
         } = this.state;
         const players = { redAttack, redDef, blackAttack, blackDef };
+
         console.log('render lobby, players: ', players);
+        
         return (
             <Game
                 startGame={startGame}
