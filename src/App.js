@@ -63,7 +63,11 @@ class App extends Component {
             goals: gameData.goals,
             status: gameData.status,
             startGame: gameData.startGame,
-            isInLobby: !!gameData.players.find(player => player.user.id === userData.user.id)
+            isInLobby: !!gameData.players.find(player =>  {
+                return userData ?
+                    player.user.id === userData.user.id :
+                    false
+            }) 
         });
 
         socket.on('update_rating', async () => {

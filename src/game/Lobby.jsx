@@ -9,17 +9,23 @@ import Config from '../config/config';
 
 export const socket = io(Config.socket_url);
 
-const getSlots = (players) => {
-    const slots = {
-        red: {
-            attack: null,
-            def: null
-        },
-        black: {
-            attack: null,
-            def: null
-        }
-    };
+const slots = {
+    red: {
+        attack: null,
+        def: null
+    },
+    black: {
+        attack: null,
+        def: null
+    }
+};
+
+const setSlots = (players) => {
+
+    slots.black.attack = null;
+    slots.black.def = null;
+    slots.red.attack = null;
+    slots.red.def = null;
 
     players.forEach(player => {
         if (player.team === 'BLACK') {
@@ -36,8 +42,6 @@ const getSlots = (players) => {
             }
         }
     });
-
-    return slots;
 }
 
 class Lobby extends React.Component {
@@ -51,7 +55,8 @@ class Lobby extends React.Component {
             blackDef: null,
             goals: props.goals,
             status: props.status,
-            startGame: props.startGame
+            startGame: props.startGame,
+            test: true
         };
     }
 
@@ -73,17 +78,17 @@ class Lobby extends React.Component {
 
         const { id, players, goals, status, startGame } = data;
 
-        const slots = getSlots(players);
+        setSlots(players);
+
+        this.setState({
+            test: !this.state.test
+        });
 
         if (players.length !== this.props.players.length || goals.length !== this.state.goals.length) {
             this.setState({
                 goals,
                 status,
-                startGame,
-                redAttack: slots.red.attack,
-                redDef: slots.red.def,
-                blackAttack: slots.black.attack,
-                blackDef: slots.black.def
+                startGame
             });
         }
 
@@ -119,14 +124,23 @@ class Lobby extends React.Component {
     render() {
         const { joinAs, getGoalCount } = this;
         const {
+            goals,
+            startGame
+        } = this.state;
+        const {
             redAttack,
             redDef,
             blackAttack,
             blackDef,
-            goals,
-            startGame
-        } = this.state;
-        const players = { redAttack, redDef, blackAttack, blackDef };
+        } = slots;
+
+        console.log('slots', slots);
+        const players = {
+            redAttack: slots.red.attack,
+            redDef: slots.red.def,
+            blackAttack: slots.black.attack,
+            blackDef: slots.black.def
+        };
 
         console.log('render lobby, players: ', players);
         
