@@ -2,6 +2,8 @@
     /* text-align: center; */
     height: 100vh;
     font-family: Consola;
+
+    user-select: none;
 }
 
 .auth_togglerWrapper {

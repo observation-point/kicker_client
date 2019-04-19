@@ -171,6 +171,7 @@ img.ava {
     bottom: 20px;
     color: white;
     text-decoration: none;
+    justify-content: center;
 }
 
 a.next {
