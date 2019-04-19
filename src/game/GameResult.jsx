@@ -61,6 +61,8 @@ class GameResult extends React.Component {
             withCredentials: true,
             data: { type: 'next' }
         });
+
+        this.props.history.push('/');
     }
 
     async playAgainAction() {
@@ -70,6 +72,8 @@ class GameResult extends React.Component {
             withCredentials: true,
             data: { type: 'play_again' }
         });
+
+        this.props.history.push('/');
     }
 
     render() {
@@ -100,9 +104,9 @@ class GameResult extends React.Component {
 
                     </div>
                     <div className="next-game">
-                    <a href={"/"} className="next" onClick={() => this.nextGameAction()}>next</a>
+                    <a className="next" onClick={() => this.nextGameAction()}>next</a>
                          | 
-                    <a href={"/"} className="play-again" onClick={() => this.playAgainAction()}>play again</a>
+                    <a className="play-again" onClick={() => this.playAgainAction()}>play again</a>
                     </div>
                 </div>
             </div>
