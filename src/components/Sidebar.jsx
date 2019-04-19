@@ -22,31 +22,31 @@ export default props => {
     }
     return (
         <Menu right styles={ styles }>
-            {userProfile ? (
+            {userProfile && (
                 <div className="menu-profile">
                     <h2>{userProfile.fullname}</h2>
                     <h3>{userProfile.rating}</h3>
                     <img alt=" " className="menu-profile-ava" src={userProfile.avatar ? userProfile.avatar : playerImg} />
                 </div>
-            ) : null}
+            )}
 
-            {showGoAway ? (
+            {showGoAway && (
                 <a onClick={handleGoAway} className="menu-item">
                     Go away
                 </a>
-            ) : null}
+            )}
 
-            {showStopGame ? (
+            {showStopGame && (
                 <a onClick={handleStopGame} className="menu-item">
                     Stop game
                 </a>
-            ) : null}
+            )}
 
-            {!userProfile ? (
+            {!userProfile && (
                 <a className="menu-item" href="/login">
                     Login
                 </a>
-            ) : null}
+            )}
 
             <a className="menu-item" href="/">
                 Lobby
@@ -56,11 +56,11 @@ export default props => {
                 Leaderboard
             </a>
 
-            {showLogout ? (
+            {showLogout && (
                 <a onClick={handleLogout} className="menu-item">
                     Logout
                 </a>
-            ) : null}
+            )}
         </Menu>
     );
 };
