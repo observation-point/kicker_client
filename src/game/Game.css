@@ -172,11 +172,13 @@ img.ava {
 }
 
 a.next {
+    display: inline;
     color: white;
     text-decoration: none;
 }
 
 a.play-again {
+    display: inline;
     color: white;
     text-decoration: none;
 }
