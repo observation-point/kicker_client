@@ -54,7 +54,9 @@ class Leaderboard extends Component {
                         </thead>
                         <tbody>
                             {usersStats.map((field, index) => {
-                                const totalWinrate = field.winGamesCount / (field.gamesCount - field.winGamesCount);
+                                const totalWinrate =
+                                    (Number(field.winGamesCount) || 1)/
+                                    (Number(field.gamesCount - field.winGamesCount) || 1);
                                 return (
                                     <>
                                       <tr>
