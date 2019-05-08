@@ -30,9 +30,9 @@ export default props => {
                 </div>
             ) : null}
             {user ? (
-                <a onClick={handleStopGame} className="menu-item" href="/">
+                <div onClick={handleStopGame} className="menu-item">
                     Stop game
-                </a>
+                </div>
             ) : null}
 
             {user ? (
