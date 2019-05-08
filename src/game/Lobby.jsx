@@ -9,8 +9,6 @@ import Config from '../config/config';
 
 export const socket = io(Config.socket_url);
 
-
-
 const getSlots = (players) => {
 
     const slots = {
