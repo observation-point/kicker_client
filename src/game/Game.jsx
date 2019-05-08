@@ -5,6 +5,7 @@ import playerRedImg from './user_red.svg';
 import plusImg from './plus.svg';
 import plusRedImg from './plus_red.svg';
 import Title from '../components/Title';
+import ChanceSlider from './ChanceSlider';
 
 const NOT_A_DATE = '- : -';
 
@@ -24,14 +25,17 @@ class Game extends React.Component {
     }
 
     render() {
-        const { startGame, goals, joinAs, getGoalCount } = this.props;
+        const { startGame, joinAs, getGoalCount, goals } = this.props;
         const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
+        const redWinrate = redAttack && redDef ? Math.round((redAttack.winRate + redDef.winRate) / 2) : 0.2;
+        const blackWinrate = blackAttack && blackDef ? Math.round((blackAttack.winRate + blackDef.winRate) / 2) : 0.2;
 
         return (
             <div id="game_root" className="game_root">
                 <Title pageTitle={getGoalCount()} />
                 <div className="game_table">
                     <Goals goals={goals} startGame={startGame} />
+                    <ChanceSlider redWinrate={redWinrate} blackWinrate={blackWinrate} goals={goals} />
 
                     <div className="game_title">kicker.lan</div>
 

@@ -1,0 +1,35 @@
+.chance_slider {
+  position: absolute;
+  width: 80%;
+  height: 40px;
+}
+
+.chance_line {
+  border-top: solid 1px white;
+}
+
+.chance_red {
+  float: right;
+  padding: 4px;
+  font-weight: 100;
+}
+
+.chance_black {
+  float: left;
+  padding: 4px;
+  font-weight: 100;
+}
+
+.chance_circle {
+  margin-left: -6px;
+  top: -5px;
+  left: 50%;
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: white;
+}
