@@ -68,8 +68,8 @@ class ChanceSlider extends React.Component {
                     : 1 - underdogDistribution;
 
             const { first, second } = getBayes(
-                { winrate: redWinrate, distribution: redDistribution },
-                { winrate: blackWinrate, distribution: blackDistribution }
+                { winrate: redWinrate || 1, distribution: redDistribution },
+                { winrate: blackWinrate || 1, distribution: blackDistribution }
             );
 
             this.setState({ redTeamChance: (first * 100).toFixed(0), blackTeamChance: (second * 100).toFixed(0) });
