@@ -45,12 +45,12 @@ class ChanceSlider extends React.Component {
             const underdogDistribution =
                 redTeamGoals !== blackTeamGoals
                     ? redTeamGoals < blackTeamGoals
-                        ? (redTeamGoals === 0
-                              ? 0.5
-                              : redTeamGoals) / ( redTeamGoals === 0 && blackTeamGoals === 1 ? 1.5 : blackTeamGoals)
-                        : (blackTeamGoals === 0
-                              ? 0.5
-                              : blackTeamGoals) / ( blackTeamGoals === 0 && redTeamGoals === 1 ? 1.5 : redTeamGoals)
+                        ? redTeamGoals === 0
+                            ? 0.5
+                            : redTeamGoals / blackTeamGoals === 1 ? 1.5 : blackTeamGoals
+                        : blackTeamGoals === 0
+                            ? 0.5
+                            : blackTeamGoals / redTeamGoals === 1 ? 1.5 : redTeamGoals
                     : 0.5;
 
             const redDistribution =
