@@ -16,8 +16,7 @@ const getBayes = (first, second) => {
     const teamFirstP = first.winrate;
     const teamSecondP = second.winrate;
 
-    const coeff =
-        first.distribution * teamFirstP + second.distribution * teamSecondP;
+    const coeff = first.distribution * teamFirstP + second.distribution * teamSecondP;
 
     return {
         first: round((first.distribution * teamFirstP) / coeff),
@@ -42,30 +41,29 @@ class ChanceSlider extends React.Component {
             const redTeamGoals = goals.filter(item => item.team === 'RED').length;
             const blackTeamGoals = goals.filter(item => item.team === 'BLACK').length;
 
-            const underdogDistribution =
-                redTeamGoals !== blackTeamGoals
-                    ? redTeamGoals < blackTeamGoals
-                        ? redTeamGoals === 0
-                            ? 0.5
-                            : redTeamGoals / blackTeamGoals === 1 ? 1.5 : blackTeamGoals
-                        : blackTeamGoals === 0
-                            ? 0.5
-                            : blackTeamGoals / redTeamGoals === 1 ? 1.5 : redTeamGoals
-                    : 0.5;
+            const getDistribution = (redGoals, blackGoals) => {
+                const distribution = { redDistribution: 0.5, blackDistribution: 0.5 };
+                if (redGoals > blackGoals) {
+                    if (blackGoals) {
+                        distribution.redDistribution = (redGoals - blackGoals) / redGoals;
+                        distribution.blackDistribution = 1 - (redGoals - blackGoals) / redGoals;
+                    } else {
+                        distribution.redDistribution = 1 - (1.5 - 1) / 1.5;
+                        distribution.blackDistribution = (1.5 - 1) / 1.5;
+                    }
+                } else if (redGoals < blackGoals) {
+                    if (redGoals) {
+                        distribution.redDistribution = (blackGoals - redGoals) / redGoals;
+                        distribution.blackDistribution = 1 - (blackGoals - redGoals) / blackGoals;
+                    } else {
+                        distribution.redDistribution = (1.5 - 1) / 1.5;
+                        distribution.blackDistribution = 1 - (1.5 - 1) / 1.5;
+                    }
+                }
+                return distribution;
+            }
 
-            const redDistribution =
-                redTeamGoals === blackTeamGoals
-                    ? 0.5
-                    : redTeamGoals < blackTeamGoals
-                    ? underdogDistribution
-                    : 1 - underdogDistribution;
-
-            const blackDistribution =
-                redTeamGoals === blackTeamGoals
-                    ? 0.5
-                    : redTeamGoals > blackTeamGoals
-                    ? underdogDistribution
-                    : 1 - underdogDistribution;
+            const { redDistribution, blackDistribution } = getDistribution(redTeamGoals, blackTeamGoals);
 
             const { first, second } = getBayes(
                 { winrate: redWinrate || 1, distribution: redDistribution },
