@@ -1,28 +1,34 @@
 import React from 'react';
 import './ChanceSlider.css';
 
-const round = (value, fixed = 3) => +(Math.round(`${value}e+${fixed}`) + `e-${fixed}`);
-
-// const userWinAbsoluteProbability = (winCount, lossCount) => round(winCount / (winCount + lossCount));
-
-// const teamWinAbsoluteProbability = (first, second) => round(
-//   (userWinAbsoluteProbability(first.w, first.l) + userWinAbsoluteProbability(second.w, second.l)) / 2
-// );
-
-// { team: [], distribution: number; }
+const getChanceToWin = (first, second) => {
+    const { first: firstDistribution, second: secondDistribution} = getDistribution(first.score, second.score);
+    const bayes = getBayes(
+        { winrate: first.winrate || 1, distribution: firstDistribution },
+        { winrate: second.winrate || 1, distribution: secondDistribution }
+    );
+    return { first: (bayes.first * 100).toFixed(0), second: (bayes.second * 100).toFixed(0) };
+};
+  
 const getBayes = (first, second) => {
-    // const teamFirstP = teamWinAbsoluteProbability(first.team[0], first.team[1]);
-    // const teamSecondP = teamWinAbsoluteProbability(second.team[0], second.team[1]);
     const teamFirstP = first.winrate;
     const teamSecondP = second.winrate;
-
     const coeff = first.distribution * teamFirstP + second.distribution * teamSecondP;
-
     return {
         first: round((first.distribution * teamFirstP) / coeff),
         second: round((second.distribution * teamSecondP) / coeff)
     };
 };
+  
+const getDistribution = (firstScore, secondScore) => {
+    const distribution = { first: 0.5, second: 0.5 };
+    const delta = Math.abs(firstScore - secondScore);
+    distribution.first += firstScore > secondScore ? delta * 0.05 : delta * -0.05;
+    distribution.second += firstScore < secondScore ? delta * 0.05 : delta * -0.05;
+    return distribution;
+};
+  
+const round = (value, fixed = 3) => +(Math.round(`${value}e+${fixed}`) + `e-${fixed}`);  
 
 class ChanceSlider extends React.Component {
     constructor(props) {
@@ -41,36 +47,12 @@ class ChanceSlider extends React.Component {
             const redTeamGoals = goals.filter(item => item.team === 'RED').length;
             const blackTeamGoals = goals.filter(item => item.team === 'BLACK').length;
 
-            const getDistribution = (redGoals, blackGoals) => {
-                const distribution = { redDistribution: 0.5, blackDistribution: 0.5 };
-                if (redGoals > blackGoals) {
-                    if (blackGoals) {
-                        distribution.redDistribution = (redGoals - blackGoals) / redGoals;
-                        distribution.blackDistribution = 1 - (redGoals - blackGoals) / redGoals;
-                    } else {
-                        distribution.redDistribution = 1 - (1.5 - 1) / 1.5;
-                        distribution.blackDistribution = (1.5 - 1) / 1.5;
-                    }
-                } else if (redGoals < blackGoals) {
-                    if (redGoals) {
-                        distribution.redDistribution = (blackGoals - redGoals) / redGoals;
-                        distribution.blackDistribution = 1 - (blackGoals - redGoals) / blackGoals;
-                    } else {
-                        distribution.redDistribution = (1.5 - 1) / 1.5;
-                        distribution.blackDistribution = 1 - (1.5 - 1) / 1.5;
-                    }
-                }
-                return distribution;
-            }
-
-            const { redDistribution, blackDistribution } = getDistribution(redTeamGoals, blackTeamGoals);
-
-            const { first, second } = getBayes(
-                { winrate: redWinrate || 1, distribution: redDistribution },
-                { winrate: blackWinrate || 1, distribution: blackDistribution }
+            const { first: redTeamChance, second: blackTeamChance } = getChanceToWin(
+                { winrate: redWinrate, score: redTeamGoals }, 
+                { winrate: blackWinrate, score: blackTeamGoals }
             );
-
-            this.setState({ redTeamChance: (first * 100).toFixed(0), blackTeamChance: (second * 100).toFixed(0) });
+            
+            this.setState({ redTeamChance, blackTeamChance });
         }
     }
 
