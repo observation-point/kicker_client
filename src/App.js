@@ -6,6 +6,7 @@ import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Leaderboard from './components/Leaderboard';
+import VideoStream from './components/VideoStream';
 
 import Auth from './auth/Auth';
 import GameResult from './game/GameResult';
@@ -39,7 +40,7 @@ class App extends Component {
             players: [],
             goals: [],
             status: null,
-            startGame: null,
+            startGame: null
         };
     }
 
@@ -103,6 +104,13 @@ class App extends Component {
         });
     }
 
+    showPlayerHandle() {
+        const { showPlayer } = this.state;
+        this.setState({
+            showPlayer: !showPlayer
+        });
+    }
+
     render() {
         const { user: userProfile } = this.state;
         const menuOptions = {
@@ -123,6 +131,7 @@ class App extends Component {
         return (
             <Router>
                 <div id="App">
+
                     <Sidebar
                         pageWrapId={'game_root'}
                         outerContainerId={'App'}
@@ -152,6 +161,7 @@ class App extends Component {
                         <Route path="/game/:gameId/" component={GameResult} />
                         <Route path="/token/:token/" component={WithToken} />
                         <Route path="/leaderboard/" component={Leaderboard} />
+                        <Route path="/live/" component={VideoStream} />
 
                         <Redirect from="*" to="/" />
                     </Switch>

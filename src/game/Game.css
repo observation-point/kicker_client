@@ -43,6 +43,18 @@
     top: -40px;
 }
 
+a.stream_button {
+    top: 5px;
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url(stream.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .player_button {
     position: absolute;
     display: block;
