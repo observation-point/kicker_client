@@ -121,6 +121,7 @@ class Lobby extends React.Component {
     render() {
         const { joinAs, getGoalCount } = this;
         const {
+            gameId,
             redAttack,
             redDef,
             blackAttack,
@@ -132,6 +133,7 @@ class Lobby extends React.Component {
 
         return (
             <Game
+                gameId={gameId}
                 startGame={startGame}
                 goals={goals}
                 players={players}

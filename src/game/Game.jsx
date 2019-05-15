@@ -9,12 +9,17 @@ import Title from '../components/Title';
 
 import Goals from './Goals';
 import ChanceSlider from './ChanceSlider';
+import VideoStream from '../components/VideoStream';
 
 const NOT_A_DATE = '- : -';
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            showReplay: false
+        }
 
         this.timer = setInterval(
             () =>
@@ -27,8 +32,14 @@ class Game extends React.Component {
         );
     }
 
+    showReplay() {
+        const { showReplay } = this.state;
+        this.setState({ showReplay: !showReplay });
+    }
+
     render() {
-        const { startGame, joinAs, getGoalCount, goals } = this.props;
+        const { showReplay } = this.state;
+        const { gameId, startGame, joinAs, getGoalCount, goals } = this.props;
         const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
         const redWinrate = redAttack && redDef ? Math.round((redAttack.winRate + redDef.winRate) / 2) : 0.2;
         const blackWinrate = blackAttack && blackDef ? Math.round((blackAttack.winRate + blackDef.winRate) / 2) : 0.2;
@@ -46,7 +57,8 @@ class Game extends React.Component {
 
                     <div className="game_title">kicker.lan</div>
                     
-                    <a href={"/live"} className="stream_button"/>
+                    <a onClick={() => this.showReplay()} className="stream_button"/>
+                    {showReplay ? <VideoStream gameId={gameId} goalId={goals[goals.length-1]} /> : null}
 
                     <div
                         className="player_button red attack"
