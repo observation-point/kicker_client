@@ -9,7 +9,7 @@ import Title from '../components/Title';
 
 import Goals from './Goals';
 import ChanceSlider from './ChanceSlider';
-import VideoStream from '../components/VideoStream';
+import VideoPlayer from '../components/VideoPlayer';
 
 const NOT_A_DATE = '- : -';
 
@@ -58,7 +58,7 @@ class Game extends React.Component {
                     <div className="game_title">kicker.lan</div>
                     
                     <a onClick={() => this.showReplay()} className="stream_button"/>
-                    {showReplay ? <VideoStream gameId={gameId} goalId={goals[goals.length-1]} /> : null}
+                    {showReplay ? <VideoPlayer gameId={gameId} goalId={goals ? goals[goals.length-1].id : null} /> : null}
 
                     <div
                         className="player_button red attack"
