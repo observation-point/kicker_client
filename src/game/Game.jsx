@@ -58,7 +58,7 @@ class Game extends React.Component {
                     <div className="game_title">kicker.lan</div>
                     
                     <a onClick={() => this.showReplay()} className="stream_button"/>
-                    {showReplay ? <VideoPlayer gameId={gameId} goalId={goals ? goals[goals.length-1].id : null} /> : null}
+                    {showReplay ? <VideoPlayer gameId={gameId} goalId={goals.length ? goals[goals.length-1].id : null} /> : null}
 
                     <div
                         className="player_button red attack"
