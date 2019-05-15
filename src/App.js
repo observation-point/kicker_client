@@ -6,7 +6,6 @@ import Config from './config/config';
 
 import Sidebar from './components/Sidebar';
 import Leaderboard from './components/Leaderboard';
-import VideoStream from './components/VideoStream';
 
 import Auth from './auth/Auth';
 import GameResult from './game/GameResult';
@@ -161,7 +160,6 @@ class App extends Component {
                         <Route path="/game/:gameId/" component={GameResult} />
                         <Route path="/token/:token/" component={WithToken} />
                         <Route path="/leaderboard/" component={Leaderboard} />
-                        <Route path="/live/" component={VideoStream} />
 
                         <Redirect from="*" to="/" />
                     </Switch>
