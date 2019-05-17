@@ -20,7 +20,8 @@ class Lobby extends React.Component {
             blackDef: null,
             goals: props.goals,
             status: props.status,
-            startGame: props.startGame
+            startGame: props.startGame,
+            gameId: null
         };
     }
 
@@ -37,8 +38,8 @@ class Lobby extends React.Component {
     fetchSocketData(data) {
         const { id, players, goals, status, startGame } = data;
         
-        
         this.setState({
+            gameId: id,
             goals,
             status,
             startGame
@@ -121,13 +122,13 @@ class Lobby extends React.Component {
     render() {
         const { joinAs, getGoalCount } = this;
         const {
-            gameId,
             redAttack,
             redDef,
             blackAttack,
             blackDef,
             goals,
-            startGame
+            startGame,
+            gameId
         } = this.state;
         const players = { redAttack, redDef, blackAttack, blackDef };
 

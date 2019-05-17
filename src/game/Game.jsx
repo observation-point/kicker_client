@@ -44,6 +44,8 @@ class Game extends React.Component {
         const redWinrate = redAttack && redDef ? Math.round((redAttack.winRate + redDef.winRate) / 2) : 0.2;
         const blackWinrate = blackAttack && blackDef ? Math.round((blackAttack.winRate + blackDef.winRate) / 2) : 0.2;
 
+        console.log(gameId, goals, goals.length ? goals[goals.length-1].id : null);
+        
         return (
             <div id="game_root" className="game_root">
                 <Title pageTitle={getGoalCount()} />
@@ -58,6 +60,7 @@ class Game extends React.Component {
                     <div className="game_title">kicker.lan</div>
                     
                     <a onClick={() => this.showReplay()} className="stream_button"/>
+                    
                     {showReplay ? <VideoPlayer gameId={gameId} goalId={goals.length ? goals[goals.length-1].id : null} /> : null}
 
                     <div

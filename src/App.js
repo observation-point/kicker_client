@@ -56,6 +56,7 @@ class App extends Component {
             withCredentials: true
         });
 
+        
         this.setState({
             user: userData.user,
             players: gameData.players,
@@ -63,7 +64,7 @@ class App extends Component {
             status: gameData.status,
             startGame: gameData.startGame
         });
-
+        
         socket.on('update_rating', async () => {
 
             const { data: userData } = await axios({
