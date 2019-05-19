@@ -128,7 +128,8 @@ class Lobby extends React.Component {
             blackDef,
             goals,
             startGame,
-            gameId
+            gameId,
+            status
         } = this.state;
         const players = { redAttack, redDef, blackAttack, blackDef };
 
@@ -140,6 +141,7 @@ class Lobby extends React.Component {
                 players={players}
                 joinAs={joinAs.bind(this)}
                 getGoalCount={getGoalCount.bind(this)}
+                status={status}
             />
         );
     }

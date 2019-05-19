@@ -12,13 +12,17 @@ import ChanceSlider from './ChanceSlider';
 import VideoPlayer from '../components/VideoPlayer';
 
 const NOT_A_DATE = '- : -';
+const BASE_REPLAY_URL = 'http://www130.lan';
 
 class Game extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            showReplay: false
+            showStreamButton: true,
+            showReplayButton: false,
+            showVideo: false,
+            videoUrl: null
         }
 
         this.timer = setInterval(
@@ -32,19 +36,60 @@ class Game extends React.Component {
         );
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.status === 'inprocess') {
+            this.setState({ showStreamButton: true });
+        } else {
+            this.setState({ showStreamButton: false });
+        }
+        nextProps.goals.push({ team: 'RED', id: 'goal4' });
+        if (nextProps.goals.length) {
+            if (nextProps.goals !== this.props.goals) {
+                this.setState({ showReplayButton: false });
+            }
+            this.setState({ showReplayButton: true });
+        } else {
+            this.setState({ showReplayButton: false });
+        }
+    }
+
+    showStream() {
+        const { showVideo } = this.state;
+        if (showVideo) {
+            this.setState({ showVideo: false });
+        } else {
+            this.setState({ videoUrl: `${BASE_REPLAY_URL}/stream/game.m3u8`, showVideo: true });
+        }
+    }
+
     showReplay() {
-        const { showReplay } = this.state;
-        this.setState({ showReplay: !showReplay });
+        const { showVideo } = this.state;
+        if (showVideo) {
+            this.setState({ showVideo: false });
+        } else {
+            const videoUrl = this.getLastGoalUrl();
+            if (videoUrl) {
+                this.setState({ videoUrl, showVideo: true });
+            }
+        }
+    }
+
+    getLastGoalUrl() {
+        const { gameId, goals } = this.props;
+        let lastGoalUrl = '';
+        if (gameId && goals) {
+            const { id: lastGoalId } = goals[goals.length - 1];
+            lastGoalUrl = `${BASE_REPLAY_URL}/replay/${gameId}/${lastGoalId}.mp4`;
+        }
+        return lastGoalUrl;
     }
 
     render() {
-        const { showReplay } = this.state;
-        const { gameId, startGame, joinAs, getGoalCount, goals } = this.props;
+        const { showStreamButton, showReplayButton, showVideo, videoUrl } = this.state;
+        const { startGame, joinAs, getGoalCount, goals } = this.props;
         const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
         const redWinrate = redAttack && redDef ? Math.round((redAttack.winRate + redDef.winRate) / 2) : 0.2;
         const blackWinrate = blackAttack && blackDef ? Math.round((blackAttack.winRate + blackDef.winRate) / 2) : 0.2;
-
-        console.log(gameId, goals, goals.length ? goals[goals.length-1].id : null);
         
         return (
             <div id="game_root" className="game_root">
@@ -59,9 +104,9 @@ class Game extends React.Component {
 
                     <div className="game_title">kicker.lan</div>
                     
-                    <a onClick={() => this.showReplay()} className="stream_button"/>
-                    
-                    {showReplay ? <VideoPlayer gameId={gameId} goalId={goals.length ? goals[goals.length-1].id : null} /> : null}
+                    {showStreamButton ? <a onClick={() => this.showStream()} className="stream_button"/> : null}
+                    {showReplayButton ? <a onClick={() => this.showReplay()} className="replay_button"/> : null}
+                    {showVideo ? <VideoPlayer videoUrl={videoUrl}/> : null}
 
                     <div
                         className="player_button red attack"
