@@ -42,7 +42,6 @@ class Game extends React.Component {
         } else {
             this.setState({ showStreamButton: false });
         }
-        nextProps.goals.push({ team: 'RED', id: 'goal4' });
         if (nextProps.goals.length) {
             if (nextProps.goals !== this.props.goals) {
                 this.setState({ showReplayButton: false });
