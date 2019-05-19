@@ -57,7 +57,7 @@ const config = {
 	cache: true,
 	devServer: devServerConfig,
 	devtool: devTools,
-	entry: './src/index.tsx',
+	entry: './src/Index.tsx',
 	module: { rules, noParse },
 	name: 'default',
 	optimization: {
