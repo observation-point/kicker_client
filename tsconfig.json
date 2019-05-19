@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es2015", "es2016", "es2017", "es2018", "esnext", "dom"],
+    "jsx": "react",
+    "sourceMap": true,
+    "allowJs": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "baseUrl": "./src",
+
+    "removeComments": true,
+    "downlevelIteration": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": false,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+
+    "types": ["react", "react-dom", "redux", "react-redux"]
+  },
+  "exclude": [
+    "./node_modules/*"
+  ]
+}

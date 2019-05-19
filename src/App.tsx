@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import './App.sass';
 import Config from './config/config';
 
-import Sidebar from './components/Sidebar';
 import Leaderboard from './components/Leaderboard';
+import Sidebar from './components/Sidebar';
 
 import Auth from './auth/Auth';
 import GameResult from './game/GameResult';
@@ -13,119 +13,118 @@ import Lobby, { socket } from './game/Lobby';
 
 console.log('TARGET: ', window.location.hostname);
 
-const WithToken = ({match}) => {
-    const token = match.params.token;
+type TokenParams = {
+    token: string;
+};
+
+type State = {
+    user: null;
+    players: void[];
+    goals: void[];
+    status: null;
+    startGame: null;
+};
+
+const WithToken = ({ match }: RouteComponentProps<TokenParams>) => {
+    const { token } = match.params;
     console.log(token);
-    const [user, setUser] = React.useState(null);
+    const [ user, setUser ] = React.useState(null);
 
     axios({
         method: 'post',
         url: Config.api_url + '/auth/token',
         withCredentials: true,
-        data: {token}
-    }).then(({data}) => setUser(data.user));
+        data: { token },
+    }).then(({ data }) => setUser(data.user));
 
     console.log(user);
-    
+
     return user && <Redirect to={'/'} />;
-}
+};
 
-class App extends Component {
-
-    constructor(props) {
-        super(props)
+class App extends Component<{}, State> {
+    constructor(props: {}) {
+        super(props);
         this.state = {
             user: null,
             players: [],
             goals: [],
             status: null,
-            startGame: null
+            startGame: null,
         };
     }
 
-    async componentDidMount() {
+    public async componentDidMount() {
         const { data: userData } = await axios({
             method: 'get',
             url: Config.api_url + '/auth',
-            withCredentials: true
+            withCredentials: true,
         });
 
         const { data: gameData } = await axios({
             method: 'get',
             url: Config.api_url + '/game',
-            withCredentials: true
+            withCredentials: true,
         });
 
-        
         this.setState({
             user: userData.user,
             players: gameData.players,
             goals: gameData.goals,
             status: gameData.status,
-            startGame: gameData.startGame
+            startGame: gameData.startGame,
         });
-        
-        socket.on('update_rating', async () => {
 
+        socket.on('update_rating', async() => {
             const { data: userData } = await axios({
                 method: 'get',
                 url: Config.api_url + '/auth',
-                withCredentials: true
+                withCredentials: true,
             });
+
             this.setState({
-                user: userData.user
+                user: userData.user,
             });
         });
     }
 
-    onLogin(user) {
+    public readonly onLogin = user => {
         this.setState({
-            user: user
+            user,
         });
     }
 
-    async logout() {
+    public readonly logout = async() => {
         await axios({
             method: 'get',
             url: `${Config.api_url}/auth/logout`,
-            withCredentials: true
+            withCredentials: true,
         });
 
         this.setState({
-            user: null
+            user: null,
         });
     }
 
-    async stopgame() {
+    public readonly stopgame = async() => {
         await axios({
             method: 'post',
             url: `${Config.api_url}/game/stop`,
-            withCredentials: true
+            withCredentials: true,
         });
     }
 
-    showPlayerHandle() {
-        const { showPlayer } = this.state;
-        this.setState({
-            showPlayer: !showPlayer
-        });
-    }
-
-    render() {
+    public render() {
         const { user: userProfile } = this.state;
         const menuOptions = {
             logout: {
                 title: 'Logout',
-                method: () => {
-                    this.logout();
-                }
+                method: this.logout,
             },
             stopGame: {
                 title: 'Stop game',
-                method: () => {
-                    this.stopgame();
-                }
-            }
+                method: this.stopgame(),
+            },
         };
 
         return (
@@ -140,7 +139,7 @@ class App extends Component {
                     />
                     <Switch>
                         <Route
-                            exact
+                            exact={true}
                             path="/"
                             component={() => (
                                 <Lobby
@@ -155,7 +154,7 @@ class App extends Component {
                         <Route
                             path="/login/"
                             component={() => (
-                                <Auth onLogin={this.onLogin.bind(this)} />
+                                <Auth onLogin={this.onLogin} />
                             )}
                         />
                         <Route path="/game/:gameId/" component={GameResult} />
