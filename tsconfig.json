@@ -36,6 +36,8 @@
     "types": ["react", "react-dom", "redux", "react-redux"]
   },
   "exclude": [
-    "./node_modules/*"
+    "./node_modules/*",
+    "./webpack/*",
+    "./webpack.config.js"
   ]
 }
