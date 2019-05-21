@@ -6,11 +6,22 @@ class VideoPlayer extends Component {
         const { videoUrl } = this.props;
 
         const style = {
-            position: 'absolute',
+            position: 'absolute'
             // zIndex: -1
         };
 
-        return <ReactPlayer style={style} url={videoUrl} playing loop controls />;
+        const config = {
+            file: {
+                hlsOptions: {
+                    forceHLS: true,
+                    debug: false
+                }
+            }
+        };
+
+        return (
+            <ReactPlayer style={style} url={videoUrl} config={config} playing loop controls />
+        );
     }
 }
 
