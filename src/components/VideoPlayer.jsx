@@ -10,14 +10,14 @@ class VideoPlayer extends Component {
             // zIndex: -1
         };
 
-        const config = {
-            file: {
-                hlsOptions: {
-                    forceHLS: true,
-                    debug: false
-                }
-            }
-        };
+        // const config = {
+        //     file: {
+        //         hlsOptions: {
+        //             forceHLS: true,
+        //             debug: false
+        //         }
+        //     }
+        // };
 
         return (
             <ReactPlayer style={style} url={videoUrl} config={config} playing loop controls />
