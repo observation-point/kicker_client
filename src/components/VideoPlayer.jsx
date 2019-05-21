@@ -20,7 +20,7 @@ class VideoPlayer extends Component {
         // };
 
         return (
-            <ReactPlayer style={style} url={videoUrl} config={config} playing loop controls />
+            <ReactPlayer style={style} url={videoUrl} playing loop controls />
         );
     }
 }
