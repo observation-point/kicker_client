@@ -37,11 +37,11 @@ class Game extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.status === 'inprocess') {
-            this.setState({ showStreamButton: true });
-        } else {
-            this.setState({ showStreamButton: false });
-        }
+        // if (nextProps.status === 'inprocess') {
+        //     this.setState({ showStreamButton: true });
+        // } else {
+        //     this.setState({ showStreamButton: false });
+        // }
         if (nextProps.goals.length) {
             if (nextProps.goals !== this.props.goals) {
                 this.setState({ showReplayButton: false });
