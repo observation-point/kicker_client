@@ -71,9 +71,9 @@ class Leaderboard extends Component {
                                         <td key={field.userId + index}>{field.rating}</td>
                                         <td key={field.userId + index}>{field.gamesCount}</td>
                                         <td key={field.userId + index}>{field.winGamesCount}</td>
-                                        <td key={field.userId + index}>{totalWinrate}</td>
-                                        <td key={field.userId + index}>{field.winrateAttack}</td>
-                                        <td key={field.userId + index}>{field.winrateDefense}</td>
+                                        <td key={field.userId + index}>{totalWinrate ? totalWinrate + '%' : null}</td>
+                                        <td key={field.userId + index}>{field.winrateAttack ? field.winrateAttack + '%' : null}</td>
+                                        <td key={field.userId + index}>{field.winrateDefense ? field.winrateDefense + '%' : null}</td>
                                       </tr>
                                     </>
                                 );
