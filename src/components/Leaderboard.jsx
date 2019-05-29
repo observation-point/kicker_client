@@ -54,9 +54,16 @@ class Leaderboard extends Component {
                         </thead>
                         <tbody>
                             {usersStats.map((field, index) => {
-                                const totalWinrate =
-                                    (Number(field.winGamesCount) || 1)/
-                                    (Number(field.gamesCount - field.winGamesCount) || 1);
+                                let totalWinrate = null;
+                                const winGames = field.winGamesCount;
+                                const loseGames = field.gamesCount - field.winGamesCount;
+                                if (winGames) {
+                                    if (loseGames) {
+                                        totalWinrate = Number(((winGames / (winGames + loseGames)) * 100).toFixed(1));
+                                    } else {
+                                        totalWinrate = null;
+                                    }
+                                }
                                 return (
                                     <>
                                       <tr>
@@ -64,7 +71,7 @@ class Leaderboard extends Component {
                                         <td key={field.userId + index}>{field.rating}</td>
                                         <td key={field.userId + index}>{field.gamesCount}</td>
                                         <td key={field.userId + index}>{field.winGamesCount}</td>
-                                        <td key={field.userId + index}>{totalWinrate.toFixed(2)}</td>
+                                        <td key={field.userId + index}>{totalWinrate}</td>
                                         <td key={field.userId + index}>{field.winrateAttack}</td>
                                         <td key={field.userId + index}>{field.winrateDefense}</td>
                                       </tr>
