@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "autobind": "^1.0.3",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "react": "^16.8.6",
     "react-burger-menu": "^2.6.8",
     "react-dom": "^16.8.6",
