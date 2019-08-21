@@ -12,7 +12,7 @@ import ChanceSlider from './ChanceSlider';
 import VideoPlayer from '../components/VideoPlayer';
 
 const NOT_A_DATE = '- : -';
-const BASE_REPLAY_URL = 'http://www130.lan';
+const BASE_REPLAY_URL = 'http://www131.lan';
 
 class Game extends React.Component {
     constructor(props) {
@@ -89,7 +89,7 @@ class Game extends React.Component {
         const { redAttack, redDef, blackAttack, blackDef } = this.props.players;
         const redWinrate = redAttack && redDef ? Math.round((redAttack.winRate + redDef.winRate) / 2) : 0.2;
         const blackWinrate = blackAttack && blackDef ? Math.round((blackAttack.winRate + blackDef.winRate) / 2) : 0.2;
-        
+
         return (
             <div id="game_root" className="game_root">
                 <Title pageTitle={getGoalCount()} />
@@ -102,7 +102,7 @@ class Game extends React.Component {
                     />
 
                     <div className="game_title">kicker.lan</div>
-                    
+
                     {showStreamButton ? <a onClick={() => this.showStream()} className="stream_button"/> : null}
                     {showReplayButton ? <a onClick={() => this.showReplay()} className="replay_button"/> : null}
                     {showVideo ? <VideoPlayer videoUrl={videoUrl}/> : null}
