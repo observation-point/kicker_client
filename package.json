@@ -18,7 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "pm2 deploy ecosystem.json prod"
+    "deploy": "./node_modules/.bin/pm2 deploy ecosystem.json prod"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -28,5 +28,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "pm2": "^3.5.1"
+  }
 }
