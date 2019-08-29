@@ -16,9 +16,9 @@ const ResultPLayer = (props) => {
                     <div className="result-team-black">{role[0].toUpperCase()}</div> : 
                     <div className="result-team-red">{role[0].toUpperCase()}</div> 
             }
-
             <div className="result-player-name">{user.fullname}</div>
             <div>{user.rating}</div>
+            <div>({user.rating - user.prevRating})</div>
         </div>
     );
 }
